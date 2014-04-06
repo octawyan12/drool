@@ -53,14 +53,20 @@ class appDevDebugProjectContainer extends Container
             'debug.event_dispatcher' => 'getDebug_EventDispatcherService',
             'debug.stopwatch' => 'getDebug_StopwatchService',
             'debug.templating.engine.php' => 'getDebug_Templating_Engine_PhpService',
-            'doctrine' => 'getDoctrineService',
-            'doctrine.dbal.connection_factory' => 'getDoctrine_Dbal_ConnectionFactoryService',
-            'doctrine.dbal.default_connection' => 'getDoctrine_Dbal_DefaultConnectionService',
-            'doctrine.dbal.logger.profiling.default' => 'getDoctrine_Dbal_Logger_Profiling_DefaultService',
-            'doctrine.orm.default_entity_manager' => 'getDoctrine_Orm_DefaultEntityManagerService',
-            'doctrine.orm.default_manager_configurator' => 'getDoctrine_Orm_DefaultManagerConfiguratorService',
-            'doctrine.orm.validator.unique' => 'getDoctrine_Orm_Validator_UniqueService',
-            'doctrine.orm.validator_initializer' => 'getDoctrine_Orm_ValidatorInitializerService',
+            'doctrine_mongodb' => 'getDoctrineMongodbService',
+            'doctrine_mongodb.odm.cache.array' => 'getDoctrineMongodb_Odm_Cache_ArrayService',
+            'doctrine_mongodb.odm.data_collector.pretty' => 'getDoctrineMongodb_Odm_DataCollector_PrettyService',
+            'doctrine_mongodb.odm.default_configuration' => 'getDoctrineMongodb_Odm_DefaultConfigurationService',
+            'doctrine_mongodb.odm.default_connection' => 'getDoctrineMongodb_Odm_DefaultConnectionService',
+            'doctrine_mongodb.odm.default_document_manager' => 'getDoctrineMongodb_Odm_DefaultDocumentManagerService',
+            'doctrine_mongodb.odm.default_manager_configurator' => 'getDoctrineMongodb_Odm_DefaultManagerConfiguratorService',
+            'doctrine_mongodb.odm.event_manager' => 'getDoctrineMongodb_Odm_EventManagerService',
+            'doctrine_mongodb.odm.metadata.annotation' => 'getDoctrineMongodb_Odm_Metadata_AnnotationService',
+            'doctrine_mongodb.odm.metadata.chain' => 'getDoctrineMongodb_Odm_Metadata_ChainService',
+            'doctrine_mongodb.odm.metadata.xml' => 'getDoctrineMongodb_Odm_Metadata_XmlService',
+            'doctrine_mongodb.odm.metadata.yml' => 'getDoctrineMongodb_Odm_Metadata_YmlService',
+            'doctrine_odm.mongodb.validator.unique' => 'getDoctrineOdm_Mongodb_Validator_UniqueService',
+            'doctrine_odm.mongodb.validator_initializer' => 'getDoctrineOdm_Mongodb_ValidatorInitializerService',
             'drool_currency.converter' => 'getDroolCurrency_ConverterService',
             'event_dispatcher' => 'getEventDispatcherService',
             'file_locator' => 'getFileLocatorService',
@@ -79,7 +85,6 @@ class appDevDebugProjectContainer extends Container
             'form.type.date' => 'getForm_Type_DateService',
             'form.type.datetime' => 'getForm_Type_DatetimeService',
             'form.type.email' => 'getForm_Type_EmailService',
-            'form.type.entity' => 'getForm_Type_EntityService',
             'form.type.file' => 'getForm_Type_FileService',
             'form.type.form' => 'getForm_Type_FormService',
             'form.type.hidden' => 'getForm_Type_HiddenService',
@@ -87,6 +92,7 @@ class appDevDebugProjectContainer extends Container
             'form.type.language' => 'getForm_Type_LanguageService',
             'form.type.locale' => 'getForm_Type_LocaleService',
             'form.type.money' => 'getForm_Type_MoneyService',
+            'form.type.mongodb_document' => 'getForm_Type_MongodbDocumentService',
             'form.type.number' => 'getForm_Type_NumberService',
             'form.type.password' => 'getForm_Type_PasswordService',
             'form.type.percent' => 'getForm_Type_PercentService',
@@ -105,7 +111,7 @@ class appDevDebugProjectContainer extends Container
             'form.type_extension.form.validator' => 'getForm_TypeExtension_Form_ValidatorService',
             'form.type_extension.repeated.validator' => 'getForm_TypeExtension_Repeated_ValidatorService',
             'form.type_extension.submit.validator' => 'getForm_TypeExtension_Submit_ValidatorService',
-            'form.type_guesser.doctrine' => 'getForm_TypeGuesser_DoctrineService',
+            'form.type_guesser.doctrine.mongodb' => 'getForm_TypeGuesser_Doctrine_MongodbService',
             'form.type_guesser.validator' => 'getForm_TypeGuesser_ValidatorService',
             'fragment.handler' => 'getFragment_HandlerService',
             'fragment.listener' => 'getFragment_ListenerService',
@@ -233,9 +239,11 @@ class appDevDebugProjectContainer extends Container
             'web_profiler.debug_toolbar' => 'getWebProfiler_DebugToolbarService',
         );
         $this->aliases = array(
-            'database_connection' => 'doctrine.dbal.default_connection',
             'debug.templating.engine.twig' => 'templating',
-            'doctrine.orm.entity_manager' => 'doctrine.orm.default_entity_manager',
+            'doctrine.odm.mongodb.document_manager' => 'doctrine_mongodb.odm.default_document_manager',
+            'doctrine_mongodb.odm.cache' => 'doctrine_mongodb.odm.cache.array',
+            'doctrine_mongodb.odm.document_manager' => 'doctrine_mongodb.odm.default_document_manager',
+            'doctrine_mongodb.odm.metadata.annotation_reader' => 'annotation_reader',
             'mailer' => 'swiftmailer.mailer.default',
             'sensio.distribution.webconfigurator' => 'sensio_distribution.webconfigurator',
             'session.storage' => 'session.storage.native',
@@ -270,7 +278,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAnnotationReaderService()
     {
-        return $this->services['annotation_reader'] = new \Doctrine\Common\Annotations\FileCacheReader(new \Doctrine\Common\Annotations\AnnotationReader(), 'D:/Dropbox/TW/Drool/app/cache/dev/annotations', true);
+        return $this->services['annotation_reader'] = new \Doctrine\Common\Annotations\FileCacheReader(new \Doctrine\Common\Annotations\AnnotationReader(), 'D:/Dropbox/TW/Drool/drool/app/cache/dev/annotations', true);
     }
 
     /**
@@ -283,9 +291,9 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAssetic_AssetManagerService()
     {
-        $this->services['assetic.asset_manager'] = $instance = new \Assetic\Factory\LazyAssetManager($this->get('assetic.asset_factory'), array('twig' => new \Assetic\Factory\Loader\CachedFormulaLoader(new \Assetic\Extension\Twig\TwigFormulaLoader($this->get('twig')), new \Assetic\Cache\ConfigCache('D:/Dropbox/TW/Drool/app/cache/dev/assetic/config'), true)));
+        $this->services['assetic.asset_manager'] = $instance = new \Assetic\Factory\LazyAssetManager($this->get('assetic.asset_factory'), array('twig' => new \Assetic\Factory\Loader\CachedFormulaLoader(new \Assetic\Extension\Twig\TwigFormulaLoader($this->get('twig')), new \Assetic\Cache\ConfigCache('D:/Dropbox/TW/Drool/drool/app/cache/dev/assetic/config'), true)));
 
-        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($this->get('templating.loader'), '', 'D:/Dropbox/TW/Drool/app/Resources/views', '/\\.[^.]+\\.twig$/'), 'twig');
+        $instance->addResource(new \Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource($this->get('templating.loader'), '', 'D:/Dropbox/TW/Drool/drool/app/Resources/views', '/\\.[^.]+\\.twig$/'), 'twig');
 
         return $instance;
     }
@@ -371,9 +379,9 @@ class appDevDebugProjectContainer extends Container
         $a = $this->get('kernel');
         $b = $this->get('templating.filename_parser');
 
-        $c = new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder($a, $b, 'D:/Dropbox/TW/Drool/app/Resources');
+        $c = new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder($a, $b, 'D:/Dropbox/TW/Drool/drool/app/Resources');
 
-        return $this->services['cache_warmer'] = new \Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate(array(0 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer($c, $this->get('templating.locator')), 1 => new \Symfony\Bundle\AsseticBundle\CacheWarmer\AssetManagerCacheWarmer($this), 2 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer($this->get('router')), 3 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer($this, $c), 4 => new \Symfony\Bridge\Doctrine\CacheWarmer\ProxyCacheWarmer($this->get('doctrine'))));
+        return $this->services['cache_warmer'] = new \Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate(array(0 => new \Doctrine\Bundle\MongoDBBundle\CacheWarmer\ProxyCacheWarmer($this), 1 => new \Doctrine\Bundle\MongoDBBundle\CacheWarmer\HydratorCacheWarmer($this), 2 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer($c, $this->get('templating.locator')), 3 => new \Symfony\Bundle\AsseticBundle\CacheWarmer\AssetManagerCacheWarmer($this), 4 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer($this->get('router')), 5 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer($this, $c)));
     }
 
     /**
@@ -489,133 +497,203 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'doctrine' service.
+     * Gets the 'doctrine_mongodb' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return Doctrine\Bundle\DoctrineBundle\Registry A Doctrine\Bundle\DoctrineBundle\Registry instance.
+     * @return Doctrine\Bundle\MongoDBBundle\ManagerRegistry A Doctrine\Bundle\MongoDBBundle\ManagerRegistry instance.
      */
-    protected function getDoctrineService()
+    protected function getDoctrineMongodbService()
     {
-        return $this->services['doctrine'] = new \Doctrine\Bundle\DoctrineBundle\Registry($this, array('default' => 'doctrine.dbal.default_connection'), array('default' => 'doctrine.orm.default_entity_manager'), 'default', 'default');
-    }
+        $this->services['doctrine_mongodb'] = $instance = new \Doctrine\Bundle\MongoDBBundle\ManagerRegistry('MongoDB', array('default' => 'doctrine_mongodb.odm.default_connection'), array('default' => 'doctrine_mongodb.odm.default_document_manager'), 'default', 'default', 'Doctrine\\ODM\\MongoDB\\Proxy\\Proxy');
 
-    /**
-     * Gets the 'doctrine.dbal.connection_factory' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return Doctrine\Bundle\DoctrineBundle\ConnectionFactory A Doctrine\Bundle\DoctrineBundle\ConnectionFactory instance.
-     */
-    protected function getDoctrine_Dbal_ConnectionFactoryService()
-    {
-        return $this->services['doctrine.dbal.connection_factory'] = new \Doctrine\Bundle\DoctrineBundle\ConnectionFactory(array());
-    }
-
-    /**
-     * Gets the 'doctrine.dbal.default_connection' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return stdClass A stdClass instance.
-     */
-    protected function getDoctrine_Dbal_DefaultConnectionService()
-    {
-        $a = new \Doctrine\DBAL\Logging\LoggerChain();
-        $a->addLogger(new \Symfony\Bridge\Doctrine\Logger\DbalLogger($this->get('monolog.logger.doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('debug.stopwatch', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
-        $a->addLogger($this->get('doctrine.dbal.logger.profiling.default'));
-
-        $b = new \Doctrine\DBAL\Configuration();
-        $b->setSQLLogger($a);
-
-        return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_mysql', 'host' => '127.0.0.1', 'port' => NULL, 'dbname' => 'drool', 'user' => 'root', 'password' => NULL, 'charset' => 'UTF8', 'driverOptions' => array()), $b, new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this), array());
-    }
-
-    /**
-     * Gets the 'doctrine.orm.default_entity_manager' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return Doctrine\ORM\EntityManager A Doctrine\ORM\EntityManager instance.
-     */
-    protected function getDoctrine_Orm_DefaultEntityManagerService()
-    {
-        $a = new \Doctrine\Common\Cache\ArrayCache();
-        $a->setNamespace('sf2orm_default_bb9d1be962a0358faecf6ec65f437036');
-
-        $b = new \Doctrine\Common\Cache\ArrayCache();
-        $b->setNamespace('sf2orm_default_bb9d1be962a0358faecf6ec65f437036');
-
-        $c = new \Doctrine\Common\Cache\ArrayCache();
-        $c->setNamespace('sf2orm_default_bb9d1be962a0358faecf6ec65f437036');
-
-        $d = new \Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver(array('D:\\Dropbox\\TW\\Drool\\src\\Drool\\CurrencyBundle\\Resources\\config\\doctrine' => 'Drool\\CurrencyBundle\\Entity'));
-        $d->setGlobalBasename('mapping');
-
-        $e = new \Doctrine\ORM\Mapping\Driver\DriverChain();
-        $e->addDriver($d, 'Drool\\CurrencyBundle\\Entity');
-
-        $f = new \Doctrine\ORM\Configuration();
-        $f->setEntityNamespaces(array('DroolCurrencyBundle' => 'Drool\\CurrencyBundle\\Entity'));
-        $f->setMetadataCacheImpl($a);
-        $f->setQueryCacheImpl($b);
-        $f->setResultCacheImpl($c);
-        $f->setMetadataDriverImpl($e);
-        $f->setProxyDir('D:/Dropbox/TW/Drool/app/cache/dev/doctrine/orm/Proxies');
-        $f->setProxyNamespace('Proxies');
-        $f->setAutoGenerateProxyClasses(true);
-        $f->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $f->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $f->setNamingStrategy(new \Doctrine\ORM\Mapping\DefaultNamingStrategy());
-
-        $this->services['doctrine.orm.default_entity_manager'] = $instance = call_user_func(array('Doctrine\\ORM\\EntityManager', 'create'), $this->get('doctrine.dbal.default_connection'), $f);
-
-        $this->get('doctrine.orm.default_manager_configurator')->configure($instance);
+        $instance->setContainer($this);
 
         return $instance;
     }
 
     /**
-     * Gets the 'doctrine.orm.default_manager_configurator' service.
+     * Gets the 'doctrine_mongodb.odm.cache.array' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return Doctrine\Bundle\DoctrineBundle\ManagerConfigurator A Doctrine\Bundle\DoctrineBundle\ManagerConfigurator instance.
+     * @return Doctrine\Common\Cache\ArrayCache A Doctrine\Common\Cache\ArrayCache instance.
      */
-    protected function getDoctrine_Orm_DefaultManagerConfiguratorService()
+    protected function getDoctrineMongodb_Odm_Cache_ArrayService()
     {
-        return $this->services['doctrine.orm.default_manager_configurator'] = new \Doctrine\Bundle\DoctrineBundle\ManagerConfigurator(array(), array());
+        return $this->services['doctrine_mongodb.odm.cache.array'] = new \Doctrine\Common\Cache\ArrayCache();
     }
 
     /**
-     * Gets the 'doctrine.orm.validator.unique' service.
+     * Gets the 'doctrine_mongodb.odm.default_configuration' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Doctrine\ODM\MongoDB\Configuration A Doctrine\ODM\MongoDB\Configuration instance.
+     */
+    protected function getDoctrineMongodb_Odm_DefaultConfigurationService()
+    {
+        $a = new \Doctrine\Common\Cache\ArrayCache();
+        $a->setNamespace('sf2mongodb_default_2d86f47114c29bfdf19e5b3b476c9adc');
+
+        $b = new \Doctrine\Bundle\MongoDBBundle\Logger\Logger($this->get('monolog.logger.doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        $b->setBatchInsertThreshold(4);
+
+        $this->services['doctrine_mongodb.odm.default_configuration'] = $instance = new \Doctrine\ODM\MongoDB\Configuration();
+
+        $instance->setDocumentNamespaces(array());
+        $instance->setMetadataCacheImpl($a);
+        $instance->setMetadataDriverImpl(new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain());
+        $instance->setProxyDir('D:/Dropbox/TW/Drool/drool/app/cache/dev/doctrine/odm/mongodb/Proxies');
+        $instance->setProxyNamespace('MongoDBODMProxies');
+        $instance->setAutoGenerateProxyClasses(false);
+        $instance->setHydratorDir('D:/Dropbox/TW/Drool/drool/app/cache/dev/doctrine/odm/mongodb/Hydrators');
+        $instance->setHydratorNamespace('Hydrators');
+        $instance->setAutoGenerateHydratorClasses(false);
+        $instance->setDefaultDB('hello_dev');
+        $instance->setDefaultCommitOptions(array());
+        $instance->setRetryConnect(0);
+        $instance->setRetryQuery(0);
+        $instance->setLoggerCallable(array(0 => new \Doctrine\Bundle\MongoDBBundle\Logger\AggregateLogger(array(0 => $b, 1 => $this->get('doctrine_mongodb.odm.data_collector.pretty'))), 1 => 'logQuery'));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'doctrine_mongodb.odm.default_connection' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Doctrine\MongoDB\Connection A Doctrine\MongoDB\Connection instance.
+     */
+    protected function getDoctrineMongodb_Odm_DefaultConnectionService()
+    {
+        return $this->services['doctrine_mongodb.odm.default_connection'] = new \Doctrine\MongoDB\Connection('mongodb://localhost:27017', array('connect' => true), $this->get('doctrine_mongodb.odm.default_configuration'), $this->get('doctrine_mongodb.odm.event_manager'));
+    }
+
+    /**
+     * Gets the 'doctrine_mongodb.odm.default_document_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Doctrine\ODM\MongoDB\DocumentManager A Doctrine\ODM\MongoDB\DocumentManager instance.
+     */
+    protected function getDoctrineMongodb_Odm_DefaultDocumentManagerService()
+    {
+        $this->services['doctrine_mongodb.odm.default_document_manager'] = $instance = call_user_func(array('Doctrine\\ODM\\MongoDB\\DocumentManager', 'create'), $this->get('doctrine_mongodb.odm.default_connection'), $this->get('doctrine_mongodb.odm.default_configuration'), $this->get('doctrine_mongodb.odm.event_manager'));
+
+        $this->get('doctrine_mongodb.odm.default_manager_configurator')->configure($instance);
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'doctrine_mongodb.odm.default_manager_configurator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Doctrine\Bundle\MongoDBBundle\ManagerConfigurator A Doctrine\Bundle\MongoDBBundle\ManagerConfigurator instance.
+     */
+    protected function getDoctrineMongodb_Odm_DefaultManagerConfiguratorService()
+    {
+        return $this->services['doctrine_mongodb.odm.default_manager_configurator'] = new \Doctrine\Bundle\MongoDBBundle\ManagerConfigurator(array());
+    }
+
+    /**
+     * Gets the 'doctrine_mongodb.odm.event_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Bridge\Doctrine\ContainerAwareEventManager A Symfony\Bridge\Doctrine\ContainerAwareEventManager instance.
+     */
+    protected function getDoctrineMongodb_Odm_EventManagerService()
+    {
+        return $this->services['doctrine_mongodb.odm.event_manager'] = new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this);
+    }
+
+    /**
+     * Gets the 'doctrine_mongodb.odm.metadata.annotation' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver A Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver instance.
+     */
+    protected function getDoctrineMongodb_Odm_Metadata_AnnotationService()
+    {
+        return $this->services['doctrine_mongodb.odm.metadata.annotation'] = new \Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array());
+    }
+
+    /**
+     * Gets the 'doctrine_mongodb.odm.metadata.chain' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain A Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain instance.
+     */
+    protected function getDoctrineMongodb_Odm_Metadata_ChainService()
+    {
+        return $this->services['doctrine_mongodb.odm.metadata.chain'] = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
+    }
+
+    /**
+     * Gets the 'doctrine_mongodb.odm.metadata.xml' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Doctrine\Bundle\MongoDBBundle\Mapping\Driver\XmlDriver A Doctrine\Bundle\MongoDBBundle\Mapping\Driver\XmlDriver instance.
+     */
+    protected function getDoctrineMongodb_Odm_Metadata_XmlService()
+    {
+        return $this->services['doctrine_mongodb.odm.metadata.xml'] = new \Doctrine\Bundle\MongoDBBundle\Mapping\Driver\XmlDriver(array());
+    }
+
+    /**
+     * Gets the 'doctrine_mongodb.odm.metadata.yml' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Doctrine\Bundle\MongoDBBundle\Mapping\Driver\YamlDriver A Doctrine\Bundle\MongoDBBundle\Mapping\Driver\YamlDriver instance.
+     */
+    protected function getDoctrineMongodb_Odm_Metadata_YmlService()
+    {
+        return $this->services['doctrine_mongodb.odm.metadata.yml'] = new \Doctrine\Bundle\MongoDBBundle\Mapping\Driver\YamlDriver(array());
+    }
+
+    /**
+     * Gets the 'doctrine_odm.mongodb.validator.unique' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
      * @return Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator A Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator instance.
      */
-    protected function getDoctrine_Orm_Validator_UniqueService()
+    protected function getDoctrineOdm_Mongodb_Validator_UniqueService()
     {
-        return $this->services['doctrine.orm.validator.unique'] = new \Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator($this->get('doctrine'));
+        return $this->services['doctrine_odm.mongodb.validator.unique'] = new \Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator($this->get('doctrine_mongodb'));
     }
 
     /**
-     * Gets the 'doctrine.orm.validator_initializer' service.
+     * Gets the 'doctrine_odm.mongodb.validator_initializer' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
      * @return Symfony\Bridge\Doctrine\Validator\DoctrineInitializer A Symfony\Bridge\Doctrine\Validator\DoctrineInitializer instance.
      */
-    protected function getDoctrine_Orm_ValidatorInitializerService()
+    protected function getDoctrineOdm_Mongodb_ValidatorInitializerService()
     {
-        return $this->services['doctrine.orm.validator_initializer'] = new \Symfony\Bridge\Doctrine\Validator\DoctrineInitializer($this->get('doctrine'));
+        return $this->services['doctrine_odm.mongodb.validator_initializer'] = new \Symfony\Bridge\Doctrine\Validator\DoctrineInitializer($this->get('doctrine_mongodb'));
     }
 
     /**
@@ -681,7 +759,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getFileLocatorService()
     {
-        return $this->services['file_locator'] = new \Symfony\Component\HttpKernel\Config\FileLocator($this->get('kernel'), 'D:/Dropbox/TW/Drool/app/Resources');
+        return $this->services['file_locator'] = new \Symfony\Component\HttpKernel\Config\FileLocator($this->get('kernel'), 'D:/Dropbox/TW/Drool/drool/app/Resources');
     }
 
     /**
@@ -733,7 +811,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getForm_RegistryService()
     {
-        return $this->services['form.registry'] = new \Symfony\Component\Form\FormRegistry(array(0 => new \Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension($this, array('form' => 'form.type.form', 'birthday' => 'form.type.birthday', 'checkbox' => 'form.type.checkbox', 'choice' => 'form.type.choice', 'collection' => 'form.type.collection', 'country' => 'form.type.country', 'date' => 'form.type.date', 'datetime' => 'form.type.datetime', 'email' => 'form.type.email', 'file' => 'form.type.file', 'hidden' => 'form.type.hidden', 'integer' => 'form.type.integer', 'language' => 'form.type.language', 'locale' => 'form.type.locale', 'money' => 'form.type.money', 'number' => 'form.type.number', 'password' => 'form.type.password', 'percent' => 'form.type.percent', 'radio' => 'form.type.radio', 'repeated' => 'form.type.repeated', 'search' => 'form.type.search', 'textarea' => 'form.type.textarea', 'text' => 'form.type.text', 'time' => 'form.type.time', 'timezone' => 'form.type.timezone', 'url' => 'form.type.url', 'button' => 'form.type.button', 'submit' => 'form.type.submit', 'reset' => 'form.type.reset', 'currency' => 'form.type.currency', 'entity' => 'form.type.entity'), array('form' => array(0 => 'form.type_extension.form.http_foundation', 1 => 'form.type_extension.form.validator', 2 => 'form.type_extension.csrf'), 'repeated' => array(0 => 'form.type_extension.repeated.validator'), 'submit' => array(0 => 'form.type_extension.submit.validator')), array(0 => 'form.type_guesser.validator', 1 => 'form.type_guesser.doctrine'))), $this->get('form.resolved_type_factory'));
+        return $this->services['form.registry'] = new \Symfony\Component\Form\FormRegistry(array(0 => new \Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension($this, array('form' => 'form.type.form', 'birthday' => 'form.type.birthday', 'checkbox' => 'form.type.checkbox', 'choice' => 'form.type.choice', 'collection' => 'form.type.collection', 'country' => 'form.type.country', 'date' => 'form.type.date', 'datetime' => 'form.type.datetime', 'email' => 'form.type.email', 'file' => 'form.type.file', 'hidden' => 'form.type.hidden', 'integer' => 'form.type.integer', 'language' => 'form.type.language', 'locale' => 'form.type.locale', 'money' => 'form.type.money', 'number' => 'form.type.number', 'password' => 'form.type.password', 'percent' => 'form.type.percent', 'radio' => 'form.type.radio', 'repeated' => 'form.type.repeated', 'search' => 'form.type.search', 'textarea' => 'form.type.textarea', 'text' => 'form.type.text', 'time' => 'form.type.time', 'timezone' => 'form.type.timezone', 'url' => 'form.type.url', 'button' => 'form.type.button', 'submit' => 'form.type.submit', 'reset' => 'form.type.reset', 'currency' => 'form.type.currency', 'document' => 'form.type.mongodb_document'), array('form' => array(0 => 'form.type_extension.form.http_foundation', 1 => 'form.type_extension.form.validator', 2 => 'form.type_extension.csrf'), 'repeated' => array(0 => 'form.type_extension.repeated.validator'), 'submit' => array(0 => 'form.type_extension.submit.validator')), array(0 => 'form.type_guesser.validator', 1 => 'form.type_guesser.doctrine.mongodb'))), $this->get('form.resolved_type_factory'));
     }
 
     /**
@@ -880,19 +958,6 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'form.type.entity' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return Symfony\Bridge\Doctrine\Form\Type\EntityType A Symfony\Bridge\Doctrine\Form\Type\EntityType instance.
-     */
-    protected function getForm_Type_EntityService()
-    {
-        return $this->services['form.type.entity'] = new \Symfony\Bridge\Doctrine\Form\Type\EntityType($this->get('doctrine'));
-    }
-
-    /**
      * Gets the 'form.type.file' service.
      *
      * This service is shared.
@@ -981,6 +1046,19 @@ class appDevDebugProjectContainer extends Container
     protected function getForm_Type_MoneyService()
     {
         return $this->services['form.type.money'] = new \Symfony\Component\Form\Extension\Core\Type\MoneyType();
+    }
+
+    /**
+     * Gets the 'form.type.mongodb_document' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Doctrine\Bundle\MongoDBBundle\Form\Type\DocumentType A Doctrine\Bundle\MongoDBBundle\Form\Type\DocumentType instance.
+     */
+    protected function getForm_Type_MongodbDocumentService()
+    {
+        return $this->services['form.type.mongodb_document'] = new \Doctrine\Bundle\MongoDBBundle\Form\Type\DocumentType($this->get('doctrine_mongodb'));
     }
 
     /**
@@ -1218,16 +1296,16 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'form.type_guesser.doctrine' service.
+     * Gets the 'form.type_guesser.doctrine.mongodb' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser A Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser instance.
+     * @return Doctrine\Bundle\MongoDBBundle\Form\DoctrineMongoDBTypeGuesser A Doctrine\Bundle\MongoDBBundle\Form\DoctrineMongoDBTypeGuesser instance.
      */
-    protected function getForm_TypeGuesser_DoctrineService()
+    protected function getForm_TypeGuesser_Doctrine_MongodbService()
     {
-        return $this->services['form.type_guesser.doctrine'] = new \Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser($this->get('doctrine'));
+        return $this->services['form.type_guesser.doctrine.mongodb'] = new \Doctrine\Bundle\MongoDBBundle\Form\DoctrineMongoDBTypeGuesser($this->get('doctrine_mongodb'));
     }
 
     /**
@@ -1421,7 +1499,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getMonolog_Handler_MainService()
     {
-        return $this->services['monolog.handler.main'] = new \Monolog\Handler\StreamHandler('D:/Dropbox/TW/Drool/app/logs/dev.log', 100, true);
+        return $this->services['monolog.handler.main'] = new \Monolog\Handler\StreamHandler('D:/Dropbox/TW/Drool/drool/app/logs/dev.log', 100, true);
     }
 
     /**
@@ -1622,10 +1700,7 @@ class appDevDebugProjectContainer extends Container
             $c->setKernel($b);
         }
 
-        $d = new \Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector($this->get('doctrine'));
-        $d->addLogger('default', $this->get('doctrine.dbal.logger.profiling.default'));
-
-        $this->services['profiler'] = $instance = new \Symfony\Component\HttpKernel\Profiler\Profiler(new \Symfony\Component\HttpKernel\Profiler\FileProfilerStorage('file:D:/Dropbox/TW/Drool/app/cache/dev/profiler', '', '', 86400), $a);
+        $this->services['profiler'] = $instance = new \Symfony\Component\HttpKernel\Profiler\Profiler(new \Symfony\Component\HttpKernel\Profiler\FileProfilerStorage('file:D:/Dropbox/TW/Drool/drool/app/cache/dev/profiler', '', '', 86400), $a);
 
         $instance->add($c);
         $instance->add($this->get('data_collector.request'));
@@ -1637,7 +1712,7 @@ class appDevDebugProjectContainer extends Container
         $instance->add($this->get('data_collector.router'));
         $instance->add(new \Symfony\Bundle\SecurityBundle\DataCollector\SecurityDataCollector($this->get('security.context', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
         $instance->add(new \Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector($this));
-        $instance->add($d);
+        $instance->add($this->get('doctrine_mongodb.odm.data_collector.pretty'));
 
         return $instance;
     }
@@ -1709,7 +1784,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getRouterService()
     {
-        return $this->services['router'] = new \Symfony\Bundle\FrameworkBundle\Routing\Router($this, 'D:/Dropbox/TW/Drool/app/cache/dev/assetic/routing.yml', array('cache_dir' => 'D:/Dropbox/TW/Drool/app/cache/dev', 'debug' => true, 'generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'generator_cache_class' => 'appDevUrlGenerator', 'matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'matcher_cache_class' => 'appDevUrlMatcher', 'strict_requirements' => true), $this->get('router.request_context', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('monolog.logger.router', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['router'] = new \Symfony\Bundle\FrameworkBundle\Routing\Router($this, 'D:/Dropbox/TW/Drool/drool/app/cache/dev/assetic/routing.yml', array('cache_dir' => 'D:/Dropbox/TW/Drool/drool/app/cache/dev', 'debug' => true, 'generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'generator_cache_class' => 'appDevUrlGenerator', 'matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'matcher_cache_class' => 'appDevUrlMatcher', 'strict_requirements' => true), $this->get('router.request_context', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('monolog.logger.router', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -1877,7 +1952,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_SecureRandomService()
     {
-        return $this->services['security.secure_random'] = new \Symfony\Component\Security\Core\Util\SecureRandom('D:/Dropbox/TW/Drool/app/cache/dev/secure_random.seed', $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['security.secure_random'] = new \Symfony\Component\Security\Core\Util\SecureRandom('D:/Dropbox/TW/Drool/drool/app/cache/dev/secure_random.seed', $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -1903,7 +1978,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSensioDistribution_WebconfiguratorService()
     {
-        return $this->services['sensio_distribution.webconfigurator'] = new \Sensio\Bundle\DistributionBundle\Configurator\Configurator('D:/Dropbox/TW/Drool/app');
+        return $this->services['sensio_distribution.webconfigurator'] = new \Sensio\Bundle\DistributionBundle\Configurator\Configurator('D:/Dropbox/TW/Drool/drool/app');
     }
 
     /**
@@ -1955,7 +2030,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSensioFrameworkExtra_Converter_Doctrine_OrmService()
     {
-        return $this->services['sensio_framework_extra.converter.doctrine.orm'] = new \Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter($this->get('doctrine', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['sensio_framework_extra.converter.doctrine.orm'] = new \Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\DoctrineParamConverter(NULL);
     }
 
     /**
@@ -2051,7 +2126,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSession_HandlerService()
     {
-        return $this->services['session.handler'] = new \Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler('D:/Dropbox/TW/Drool/app/cache/dev/sessions');
+        return $this->services['session.handler'] = new \Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler('D:/Dropbox/TW/Drool/drool/app/cache/dev/sessions');
     }
 
     /**
@@ -2064,7 +2139,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSession_Storage_FilesystemService()
     {
-        return $this->services['session.storage.filesystem'] = new \Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage('D:/Dropbox/TW/Drool/app/cache/dev/sessions');
+        return $this->services['session.storage.filesystem'] = new \Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage('D:/Dropbox/TW/Drool/drool/app/cache/dev/sessions');
     }
 
     /**
@@ -2198,14 +2273,16 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSwiftmailer_Mailer_Default_Transport_RealService()
     {
-        $this->services['swiftmailer.mailer.default.transport.real'] = $instance = new \Swift_Transport_EsmtpTransport(new \Swift_Transport_StreamBuffer(new \Swift_StreamFilters_StringReplacementFilterFactory()), array(0 => new \Swift_Transport_Esmtp_AuthHandler(array(0 => new \Swift_Transport_Esmtp_Auth_CramMd5Authenticator(), 1 => new \Swift_Transport_Esmtp_Auth_LoginAuthenticator(), 2 => new \Swift_Transport_Esmtp_Auth_PlainAuthenticator()))), $this->get('swiftmailer.mailer.default.transport.eventdispatcher'));
+        $a = new \Swift_Transport_Esmtp_AuthHandler(array(0 => new \Swift_Transport_Esmtp_Auth_CramMd5Authenticator(), 1 => new \Swift_Transport_Esmtp_Auth_LoginAuthenticator(), 2 => new \Swift_Transport_Esmtp_Auth_PlainAuthenticator()));
+        $a->setUsername(NULL);
+        $a->setPassword(NULL);
+        $a->setAuthMode(NULL);
+
+        $this->services['swiftmailer.mailer.default.transport.real'] = $instance = new \Swift_Transport_EsmtpTransport(new \Swift_Transport_StreamBuffer(new \Swift_StreamFilters_StringReplacementFilterFactory()), array(0 => $a), $this->get('swiftmailer.mailer.default.transport.eventdispatcher'));
 
         $instance->setHost('127.0.0.1');
         $instance->setPort(25);
         $instance->setEncryption(NULL);
-        $instance->setUsername(NULL);
-        $instance->setPassword(NULL);
-        $instance->setAuthMode(NULL);
         $instance->setTimeout(30);
         $instance->setSourceIp(NULL);
 
@@ -2310,7 +2387,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTemplating_Helper_CodeService()
     {
-        return $this->services['templating.helper.code'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\CodeHelper(NULL, 'D:/Dropbox/TW/Drool/app', 'UTF-8');
+        return $this->services['templating.helper.code'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\CodeHelper(NULL, 'D:/Dropbox/TW/Drool/drool/app', 'UTF-8');
     }
 
     /**
@@ -2802,7 +2879,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTranslator_DefaultService()
     {
-        return $this->services['translator.default'] = new \Symfony\Bundle\FrameworkBundle\Translation\Translator($this, $this->get('translator.selector'), array('translation.loader.php' => array(0 => 'php'), 'translation.loader.yml' => array(0 => 'yml'), 'translation.loader.xliff' => array(0 => 'xlf', 1 => 'xliff'), 'translation.loader.po' => array(0 => 'po'), 'translation.loader.mo' => array(0 => 'mo'), 'translation.loader.qt' => array(0 => 'ts'), 'translation.loader.csv' => array(0 => 'csv'), 'translation.loader.res' => array(0 => 'res'), 'translation.loader.dat' => array(0 => 'dat'), 'translation.loader.ini' => array(0 => 'ini')), array('cache_dir' => 'D:/Dropbox/TW/Drool/app/cache/dev/translations', 'debug' => true));
+        return $this->services['translator.default'] = new \Symfony\Bundle\FrameworkBundle\Translation\Translator($this, $this->get('translator.selector'), array('translation.loader.php' => array(0 => 'php'), 'translation.loader.yml' => array(0 => 'yml'), 'translation.loader.xliff' => array(0 => 'xlf', 1 => 'xliff'), 'translation.loader.po' => array(0 => 'po'), 'translation.loader.mo' => array(0 => 'mo'), 'translation.loader.qt' => array(0 => 'ts'), 'translation.loader.csv' => array(0 => 'csv'), 'translation.loader.res' => array(0 => 'res'), 'translation.loader.dat' => array(0 => 'dat'), 'translation.loader.ini' => array(0 => 'ini')), array('cache_dir' => 'D:/Dropbox/TW/Drool/drool/app/cache/dev/translations', 'debug' => true));
     }
 
     /**
@@ -2815,21 +2892,20 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTwigService()
     {
-        $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader'), array('debug' => true, 'strict_variables' => true, 'exception_controller' => 'twig.controller.exception:showAction', 'autoescape_service' => NULL, 'autoescape_service_method' => NULL, 'cache' => 'D:/Dropbox/TW/Drool/app/cache/dev/twig', 'charset' => 'UTF-8', 'paths' => array()));
+        $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader'), array('debug' => true, 'strict_variables' => true, 'exception_controller' => 'twig.controller.exception:showAction', 'autoescape_service' => NULL, 'autoescape_service_method' => NULL, 'cache' => 'D:/Dropbox/TW/Drool/drool/app/cache/dev/twig', 'charset' => 'UTF-8', 'paths' => array()));
 
         $instance->addExtension(new \Symfony\Bundle\SecurityBundle\Twig\Extension\LogoutUrlExtension($this->get('templating.helper.logout_url')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\SecurityExtension($this->get('security.context', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\TranslationExtension($this->get('translator')));
         $instance->addExtension(new \Symfony\Bundle\TwigBundle\Extension\AssetsExtension($this));
         $instance->addExtension(new \Symfony\Bundle\TwigBundle\Extension\ActionsExtension($this));
-        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\CodeExtension(NULL, 'D:/Dropbox/TW/Drool/app', 'UTF-8'));
+        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\CodeExtension(NULL, 'D:/Dropbox/TW/Drool/drool/app', 'UTF-8'));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\RoutingExtension($this->get('router')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\YamlExtension());
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\HttpKernelExtension($this->get('fragment.handler')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\FormExtension(new \Symfony\Bridge\Twig\Form\TwigRenderer(new \Symfony\Bridge\Twig\Form\TwigRendererEngine(array(0 => 'form_div_layout.html.twig')), $this->get('form.csrf_provider', ContainerInterface::NULL_ON_INVALID_REFERENCE))));
         $instance->addExtension(new \Twig_Extension_Debug());
         $instance->addExtension(new \Symfony\Bundle\AsseticBundle\Twig\AsseticExtension($this->get('assetic.asset_factory'), $this->get('templating.name_parser'), true, array(), array(), $this->get('assetic.value_supplier.default', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
-        $instance->addExtension(new \Doctrine\Bundle\DoctrineBundle\Twig\DoctrineExtension());
         $instance->addExtension($this->get('twig.extension.acme.demo'));
         $instance->addGlobal('app', $this->get('templating.globals'));
 
@@ -2874,18 +2950,18 @@ class appDevDebugProjectContainer extends Container
     {
         $this->services['twig.loader'] = $instance = new \Symfony\Bundle\TwigBundle\Loader\FilesystemLoader($this->get('templating.locator'), $this->get('templating.name_parser'));
 
-        $instance->addPath('D:\\Dropbox\\TW\\Drool\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\FrameworkBundle/Resources/views', 'Framework');
-        $instance->addPath('D:\\Dropbox\\TW\\Drool\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\SecurityBundle/Resources/views', 'Security');
-        $instance->addPath('D:\\Dropbox\\TW\\Drool\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\TwigBundle/Resources/views', 'Twig');
-        $instance->addPath('D:\\Dropbox\\TW\\Drool\\vendor\\symfony\\swiftmailer-bundle\\Symfony\\Bundle\\SwiftmailerBundle/Resources/views', 'Swiftmailer');
-        $instance->addPath('D:\\Dropbox\\TW\\Drool\\vendor\\doctrine\\doctrine-bundle\\Doctrine\\Bundle\\DoctrineBundle/Resources/views', 'Doctrine');
-        $instance->addPath('D:\\Dropbox\\TW\\Drool\\src\\Drool\\CurrencyBundle/Resources/views', 'DroolCurrency');
-        $instance->addPath('D:\\Dropbox\\TW\\Drool\\src\\Drool\\ApiBundle/Resources/views', 'DroolApi');
-        $instance->addPath('D:\\Dropbox\\TW\\Drool\\src\\Acme\\DemoBundle/Resources/views', 'AcmeDemo');
-        $instance->addPath('D:\\Dropbox\\TW\\Drool\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\WebProfilerBundle/Resources/views', 'WebProfiler');
-        $instance->addPath('D:\\Dropbox\\TW\\Drool\\vendor\\sensio\\distribution-bundle\\Sensio\\Bundle\\DistributionBundle/Resources/views', 'SensioDistribution');
-        $instance->addPath('D:/Dropbox/TW/Drool/app/Resources/views');
-        $instance->addPath('D:\\Dropbox\\TW\\Drool\\vendor\\symfony\\symfony\\src\\Symfony\\Bridge\\Twig/Resources/views/Form');
+        $instance->addPath('D:\\Dropbox\\TW\\Drool\\drool\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\FrameworkBundle/Resources/views', 'Framework');
+        $instance->addPath('D:\\Dropbox\\TW\\Drool\\drool\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\SecurityBundle/Resources/views', 'Security');
+        $instance->addPath('D:\\Dropbox\\TW\\Drool\\drool\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\TwigBundle/Resources/views', 'Twig');
+        $instance->addPath('D:\\Dropbox\\TW\\Drool\\drool\\vendor\\symfony\\swiftmailer-bundle\\Symfony\\Bundle\\SwiftmailerBundle/Resources/views', 'Swiftmailer');
+        $instance->addPath('D:\\Dropbox\\TW\\Drool\\drool\\vendor\\doctrine\\mongodb-odm-bundle\\Doctrine\\Bundle\\MongoDBBundle/Resources/views', 'DoctrineMongoDB');
+        $instance->addPath('D:\\Dropbox\\TW\\Drool\\drool\\src\\Drool\\CurrencyBundle/Resources/views', 'DroolCurrency');
+        $instance->addPath('D:\\Dropbox\\TW\\Drool\\drool\\src\\Drool\\ApiBundle/Resources/views', 'DroolApi');
+        $instance->addPath('D:\\Dropbox\\TW\\Drool\\drool\\src\\Acme\\DemoBundle/Resources/views', 'AcmeDemo');
+        $instance->addPath('D:\\Dropbox\\TW\\Drool\\drool\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\WebProfilerBundle/Resources/views', 'WebProfiler');
+        $instance->addPath('D:\\Dropbox\\TW\\Drool\\drool\\vendor\\sensio\\distribution-bundle\\Sensio\\Bundle\\DistributionBundle/Resources/views', 'SensioDistribution');
+        $instance->addPath('D:/Dropbox/TW/Drool/drool/app/Resources/views');
+        $instance->addPath('D:\\Dropbox\\TW\\Drool\\drool\\vendor\\symfony\\symfony\\src\\Symfony\\Bridge\\Twig/Resources/views/Form');
 
         return $instance;
     }
@@ -2926,7 +3002,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getValidatorService()
     {
-        return $this->services['validator'] = new \Symfony\Component\Validator\Validator($this->get('validator.mapping.class_metadata_factory'), new \Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory($this, array('security.validator.user_password' => 'security.validator.user_password', 'doctrine.orm.validator.unique' => 'doctrine.orm.validator.unique')), $this->get('translator.default'), 'validators', array(0 => $this->get('doctrine.orm.validator_initializer')));
+        return $this->services['validator'] = new \Symfony\Component\Validator\Validator($this->get('validator.mapping.class_metadata_factory'), new \Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory($this, array('security.validator.user_password' => 'security.validator.user_password', 'doctrine_odm.mongodb.unique' => 'doctrine_odm.mongodb.validator.unique')), $this->get('translator.default'), 'validators', array(0 => $this->get('doctrine_odm.mongodb.validator_initializer')));
     }
 
     /**
@@ -2952,7 +3028,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getWebProfiler_Controller_ProfilerService()
     {
-        return $this->services['web_profiler.controller.profiler'] = new \Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController($this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('profiler', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('twig'), array('data_collector.config' => array(0 => 'config', 1 => '@WebProfiler/Collector/config.html.twig'), 'data_collector.request' => array(0 => 'request', 1 => '@WebProfiler/Collector/request.html.twig'), 'data_collector.exception' => array(0 => 'exception', 1 => '@WebProfiler/Collector/exception.html.twig'), 'data_collector.events' => array(0 => 'events', 1 => '@WebProfiler/Collector/events.html.twig'), 'data_collector.logger' => array(0 => 'logger', 1 => '@WebProfiler/Collector/logger.html.twig'), 'data_collector.time' => array(0 => 'time', 1 => '@WebProfiler/Collector/time.html.twig'), 'data_collector.memory' => array(0 => 'memory', 1 => '@WebProfiler/Collector/memory.html.twig'), 'data_collector.router' => array(0 => 'router', 1 => '@WebProfiler/Collector/router.html.twig'), 'data_collector.security' => array(0 => 'security', 1 => 'SecurityBundle:Collector:security'), 'swiftmailer.data_collector' => array(0 => 'swiftmailer', 1 => '@Swiftmailer/Collector/swiftmailer.html.twig'), 'data_collector.doctrine' => array(0 => 'db', 1 => 'DoctrineBundle:Collector:db')), 'bottom');
+        return $this->services['web_profiler.controller.profiler'] = new \Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController($this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('profiler', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('twig'), array('data_collector.config' => array(0 => 'config', 1 => '@WebProfiler/Collector/config.html.twig'), 'data_collector.request' => array(0 => 'request', 1 => '@WebProfiler/Collector/request.html.twig'), 'data_collector.exception' => array(0 => 'exception', 1 => '@WebProfiler/Collector/exception.html.twig'), 'data_collector.events' => array(0 => 'events', 1 => '@WebProfiler/Collector/events.html.twig'), 'data_collector.logger' => array(0 => 'logger', 1 => '@WebProfiler/Collector/logger.html.twig'), 'data_collector.time' => array(0 => 'time', 1 => '@WebProfiler/Collector/time.html.twig'), 'data_collector.memory' => array(0 => 'memory', 1 => '@WebProfiler/Collector/memory.html.twig'), 'data_collector.router' => array(0 => 'router', 1 => '@WebProfiler/Collector/router.html.twig'), 'data_collector.security' => array(0 => 'security', 1 => 'SecurityBundle:Collector:security'), 'swiftmailer.data_collector' => array(0 => 'swiftmailer', 1 => '@Swiftmailer/Collector/swiftmailer.html.twig'), 'doctrine_mongodb.odm.data_collector.pretty' => array(0 => 'mongodb', 1 => 'DoctrineMongoDBBundle:Collector:mongodb')), 'bottom');
     }
 
     /**
@@ -3011,7 +3087,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAssetic_AssetFactoryService()
     {
-        $this->services['assetic.asset_factory'] = $instance = new \Symfony\Bundle\AsseticBundle\Factory\AssetFactory($this->get('kernel'), $this, $this->getParameterBag(), 'D:/Dropbox/TW/Drool/app/../web', true);
+        $this->services['assetic.asset_factory'] = $instance = new \Symfony\Bundle\AsseticBundle\Factory\AssetFactory($this->get('kernel'), $this, $this->getParameterBag(), 'D:/Dropbox/TW/Drool/drool/app/../web', true);
 
         $instance->addWorker(new \Symfony\Bundle\AsseticBundle\Factory\Worker\UseControllerWorker());
 
@@ -3032,7 +3108,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getAssetic_CacheService()
     {
-        return $this->services['assetic.cache'] = new \Assetic\Cache\FilesystemCache('D:/Dropbox/TW/Drool/app/cache/dev/assetic/assets');
+        return $this->services['assetic.cache'] = new \Assetic\Cache\FilesystemCache('D:/Dropbox/TW/Drool/drool/app/cache/dev/assetic/assets');
     }
 
     /**
@@ -3070,7 +3146,7 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'doctrine.dbal.logger.profiling.default' service.
+     * Gets the 'doctrine_mongodb.odm.data_collector.pretty' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
@@ -3079,11 +3155,15 @@ class appDevDebugProjectContainer extends Container
      * If you want to be able to request this service from the container directly,
      * make it public, otherwise you might end up with broken code.
      *
-     * @return Doctrine\DBAL\Logging\DebugStack A Doctrine\DBAL\Logging\DebugStack instance.
+     * @return Doctrine\Bundle\MongoDBBundle\DataCollector\PrettyDataCollector A Doctrine\Bundle\MongoDBBundle\DataCollector\PrettyDataCollector instance.
      */
-    protected function getDoctrine_Dbal_Logger_Profiling_DefaultService()
+    protected function getDoctrineMongodb_Odm_DataCollector_PrettyService()
     {
-        return $this->services['doctrine.dbal.logger.profiling.default'] = new \Doctrine\DBAL\Logging\DebugStack();
+        $this->services['doctrine_mongodb.odm.data_collector.pretty'] = $instance = new \Doctrine\Bundle\MongoDBBundle\DataCollector\PrettyDataCollector();
+
+        $instance->setBatchInsertThreshold(4);
+
+        return $instance;
     }
 
     /**
@@ -3211,7 +3291,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getTemplating_LocatorService()
     {
-        return $this->services['templating.locator'] = new \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator($this->get('file_locator'), 'D:/Dropbox/TW/Drool/app/cache/dev');
+        return $this->services['templating.locator'] = new \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator($this->get('file_locator'), 'D:/Dropbox/TW/Drool/drool/app/cache/dev');
     }
 
     /**
@@ -3262,7 +3342,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getValidator_Mapping_ClassMetadataFactoryService()
     {
-        return $this->services['validator.mapping.class_metadata_factory'] = new \Symfony\Component\Validator\Mapping\ClassMetadataFactory(new \Symfony\Component\Validator\Mapping\Loader\LoaderChain(array(0 => new \Symfony\Component\Validator\Mapping\Loader\AnnotationLoader($this->get('annotation_reader')), 1 => new \Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader(), 2 => new \Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader(array(0 => 'D:\\Dropbox\\TW\\Drool\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml')), 3 => new \Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader(array()))), NULL);
+        return $this->services['validator.mapping.class_metadata_factory'] = new \Symfony\Component\Validator\Mapping\ClassMetadataFactory(new \Symfony\Component\Validator\Mapping\Loader\LoaderChain(array(0 => new \Symfony\Component\Validator\Mapping\Loader\AnnotationLoader($this->get('annotation_reader')), 1 => new \Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader(), 2 => new \Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader(array(0 => 'D:\\Dropbox\\TW\\Drool\\drool\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml')), 3 => new \Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader(array()))), NULL);
     }
 
     /**
@@ -3316,12 +3396,12 @@ class appDevDebugProjectContainer extends Container
     protected function getDefaultParameters()
     {
         return array(
-            'kernel.root_dir' => 'D:/Dropbox/TW/Drool/app',
+            'kernel.root_dir' => 'D:/Dropbox/TW/Drool/drool/app',
             'kernel.environment' => 'dev',
             'kernel.debug' => true,
             'kernel.name' => 'app',
-            'kernel.cache_dir' => 'D:/Dropbox/TW/Drool/app/cache/dev',
-            'kernel.logs_dir' => 'D:/Dropbox/TW/Drool/app/logs',
+            'kernel.cache_dir' => 'D:/Dropbox/TW/Drool/drool/app/cache/dev',
+            'kernel.logs_dir' => 'D:/Dropbox/TW/Drool/drool/app/logs',
             'kernel.bundles' => array(
                 'FrameworkBundle' => 'Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle',
                 'SecurityBundle' => 'Symfony\\Bundle\\SecurityBundle\\SecurityBundle',
@@ -3329,7 +3409,7 @@ class appDevDebugProjectContainer extends Container
                 'MonologBundle' => 'Symfony\\Bundle\\MonologBundle\\MonologBundle',
                 'SwiftmailerBundle' => 'Symfony\\Bundle\\SwiftmailerBundle\\SwiftmailerBundle',
                 'AsseticBundle' => 'Symfony\\Bundle\\AsseticBundle\\AsseticBundle',
-                'DoctrineBundle' => 'Doctrine\\Bundle\\DoctrineBundle\\DoctrineBundle',
+                'DoctrineMongoDBBundle' => 'Doctrine\\Bundle\\MongoDBBundle\\DoctrineMongoDBBundle',
                 'SensioFrameworkExtraBundle' => 'Sensio\\Bundle\\FrameworkExtraBundle\\SensioFrameworkExtraBundle',
                 'DroolCurrencyBundle' => 'Drool\\CurrencyBundle\\DroolCurrencyBundle',
                 'DroolApiBundle' => 'Drool\\ApiBundle\\DroolApiBundle',
@@ -3352,6 +3432,7 @@ class appDevDebugProjectContainer extends Container
             'mailer_password' => NULL,
             'locale' => 'en',
             'secret' => 'ThisTokenIsNotSoSecretChangeIt',
+            'mongodb_server' => 'mongodb://localhost:27017',
             'controller_resolver.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerResolver',
             'controller_name_converter.class' => 'Symfony\\Bundle\\FrameworkBundle\\Controller\\ControllerNameParser',
             'response_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener',
@@ -3398,7 +3479,7 @@ class appDevDebugProjectContainer extends Container
             'debug.errors_logger_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ErrorsLoggerListener',
             'debug.event_dispatcher.class' => 'Symfony\\Component\\HttpKernel\\Debug\\TraceableEventDispatcher',
             'debug.stopwatch.class' => 'Symfony\\Component\\Stopwatch\\Stopwatch',
-            'debug.container.dump' => 'D:/Dropbox/TW/Drool/app/cache/dev/appDevDebugProjectContainer.xml',
+            'debug.container.dump' => 'D:/Dropbox/TW/Drool/drool/app/cache/dev/appDevDebugProjectContainer.xml',
             'debug.controller_resolver.class' => 'Symfony\\Component\\HttpKernel\\Controller\\TraceableControllerResolver',
             'kernel.secret' => 'ThisTokenIsNotSoSecretChangeIt',
             'kernel.http_method_override' => true,
@@ -3420,7 +3501,7 @@ class appDevDebugProjectContainer extends Container
             'session.storage.options' => array(
 
             ),
-            'session.save_path' => 'D:/Dropbox/TW/Drool/app/cache/dev/sessions',
+            'session.save_path' => 'D:/Dropbox/TW/Drool/drool/app/cache/dev/sessions',
             'form.resolved_type_factory.class' => 'Symfony\\Component\\Form\\ResolvedFormTypeFactory',
             'form.registry.class' => 'Symfony\\Component\\Form\\FormRegistry',
             'form.factory.class' => 'Symfony\\Component\\Form\\FormFactory',
@@ -3476,7 +3557,7 @@ class appDevDebugProjectContainer extends Container
             'validator.mapping.loader.yaml_files_loader.class' => 'Symfony\\Component\\Validator\\Mapping\\Loader\\YamlFilesLoader',
             'validator.validator_factory.class' => 'Symfony\\Bundle\\FrameworkBundle\\Validator\\ConstraintValidatorFactory',
             'validator.mapping.loader.xml_files_loader.mapping_files' => array(
-                0 => 'D:\\Dropbox\\TW\\Drool\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml',
+                0 => 'D:\\Dropbox\\TW\\Drool\\drool\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml',
             ),
             'validator.mapping.loader.yaml_files_loader.mapping_files' => array(
 
@@ -3495,7 +3576,7 @@ class appDevDebugProjectContainer extends Container
             'data_collector.router.class' => 'Symfony\\Bundle\\FrameworkBundle\\DataCollector\\RouterDataCollector',
             'profiler_listener.only_exceptions' => false,
             'profiler_listener.only_master_requests' => false,
-            'profiler.storage.dsn' => 'file:D:/Dropbox/TW/Drool/app/cache/dev/profiler',
+            'profiler.storage.dsn' => 'file:D:/Dropbox/TW/Drool/drool/app/cache/dev/profiler',
             'profiler.storage.username' => '',
             'profiler.storage.password' => '',
             'profiler.storage.lifetime' => 86400,
@@ -3519,7 +3600,7 @@ class appDevDebugProjectContainer extends Container
             'router.request_context.host' => 'localhost',
             'router.request_context.scheme' => 'http',
             'router.request_context.base_url' => '',
-            'router.resource' => 'D:/Dropbox/TW/Drool/app/cache/dev/assetic/routing.yml',
+            'router.resource' => 'D:/Dropbox/TW/Drool/drool/app/cache/dev/assetic/routing.yml',
             'router.cache_class_prefix' => 'appDev',
             'request_listener.http_port' => 80,
             'request_listener.https_port' => 443,
@@ -3631,7 +3712,7 @@ class appDevDebugProjectContainer extends Container
                 'exception_controller' => 'twig.controller.exception:showAction',
                 'autoescape_service' => NULL,
                 'autoescape_service_method' => NULL,
-                'cache' => 'D:/Dropbox/TW/Drool/app/cache/dev/twig',
+                'cache' => 'D:/Dropbox/TW/Drool/drool/app/cache/dev/twig',
                 'charset' => 'UTF-8',
                 'paths' => array(
 
@@ -3686,7 +3767,7 @@ class appDevDebugProjectContainer extends Container
             'swiftmailer.mailer.default.transport.smtp.auth_mode' => NULL,
             'swiftmailer.mailer.default.transport.smtp.timeout' => 30,
             'swiftmailer.mailer.default.transport.smtp.source_ip' => NULL,
-            'swiftmailer.spool.default.memory.path' => 'D:/Dropbox/TW/Drool/app/cache/dev/swiftmailer/spool/default',
+            'swiftmailer.spool.default.memory.path' => 'D:/Dropbox/TW/Drool/drool/app/cache/dev/swiftmailer/spool/default',
             'swiftmailer.mailer.default.spool.enabled' => true,
             'swiftmailer.mailer.default.plugin.impersonate' => NULL,
             'swiftmailer.mailer.default.single_address' => NULL,
@@ -3712,7 +3793,7 @@ class appDevDebugProjectContainer extends Container
             'assetic.node.paths' => array(
 
             ),
-            'assetic.cache_dir' => 'D:/Dropbox/TW/Drool/app/cache/dev/assetic',
+            'assetic.cache_dir' => 'D:/Dropbox/TW/Drool/drool/app/cache/dev/assetic',
             'assetic.bundles' => array(
 
             ),
@@ -3724,8 +3805,8 @@ class appDevDebugProjectContainer extends Container
             'assetic.debug' => true,
             'assetic.use_controller' => true,
             'assetic.enable_profiler' => false,
-            'assetic.read_from' => 'D:/Dropbox/TW/Drool/app/../web',
-            'assetic.write_to' => 'D:/Dropbox/TW/Drool/app/../web',
+            'assetic.read_from' => 'D:/Dropbox/TW/Drool/drool/app/../web',
+            'assetic.write_to' => 'D:/Dropbox/TW/Drool/drool/app/../web',
             'assetic.variables' => array(
 
             ),
@@ -3742,64 +3823,65 @@ class appDevDebugProjectContainer extends Container
             'assetic.cache.class' => 'Assetic\\Cache\\FilesystemCache',
             'assetic.use_controller_worker.class' => 'Symfony\\Bundle\\AsseticBundle\\Factory\\Worker\\UseControllerWorker',
             'assetic.request_listener.class' => 'Symfony\\Bundle\\AsseticBundle\\EventListener\\RequestListener',
-            'doctrine.dbal.logger.chain.class' => 'Doctrine\\DBAL\\Logging\\LoggerChain',
-            'doctrine.dbal.logger.profiling.class' => 'Doctrine\\DBAL\\Logging\\DebugStack',
-            'doctrine.dbal.logger.class' => 'Symfony\\Bridge\\Doctrine\\Logger\\DbalLogger',
-            'doctrine.dbal.configuration.class' => 'Doctrine\\DBAL\\Configuration',
-            'doctrine.data_collector.class' => 'Doctrine\\Bundle\\DoctrineBundle\\DataCollector\\DoctrineDataCollector',
-            'doctrine.dbal.connection.event_manager.class' => 'Symfony\\Bridge\\Doctrine\\ContainerAwareEventManager',
-            'doctrine.dbal.connection_factory.class' => 'Doctrine\\Bundle\\DoctrineBundle\\ConnectionFactory',
-            'doctrine.dbal.events.mysql_session_init.class' => 'Doctrine\\DBAL\\Event\\Listeners\\MysqlSessionInit',
-            'doctrine.dbal.events.oracle_session_init.class' => 'Doctrine\\DBAL\\Event\\Listeners\\OracleSessionInit',
-            'doctrine.class' => 'Doctrine\\Bundle\\DoctrineBundle\\Registry',
-            'doctrine.entity_managers' => array(
-                'default' => 'doctrine.orm.default_entity_manager',
-            ),
-            'doctrine.default_entity_manager' => 'default',
-            'doctrine.dbal.connection_factory.types' => array(
+            'doctrine_mongodb.odm.connection.class' => 'Doctrine\\MongoDB\\Connection',
+            'doctrine_mongodb.odm.configuration.class' => 'Doctrine\\ODM\\MongoDB\\Configuration',
+            'doctrine_mongodb.odm.document_manager.class' => 'Doctrine\\ODM\\MongoDB\\DocumentManager',
+            'doctrine_mongodb.odm.manager_configurator.class' => 'Doctrine\\Bundle\\MongoDBBundle\\ManagerConfigurator',
+            'doctrine_mongodb.odm.logger.class' => 'Doctrine\\Bundle\\MongoDBBundle\\Logger\\Logger',
+            'doctrine_mongodb.odm.logger.aggregate.class' => 'Doctrine\\Bundle\\MongoDBBundle\\Logger\\AggregateLogger',
+            'doctrine_mongodb.odm.data_collector.standard.class' => 'Doctrine\\Bundle\\MongoDBBundle\\DataCollector\\StandardDataCollector',
+            'doctrine_mongodb.odm.data_collector.pretty.class' => 'Doctrine\\Bundle\\MongoDBBundle\\DataCollector\\PrettyDataCollector',
+            'doctrine_mongodb.odm.event_manager.class' => 'Symfony\\Bridge\\Doctrine\\ContainerAwareEventManager',
+            'doctrine_odm.mongodb.validator_initializer.class' => 'Symfony\\Bridge\\Doctrine\\Validator\\DoctrineInitializer',
+            'doctrine_odm.mongodb.validator.unique.class' => 'Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntityValidator',
+            'doctrine_mongodb.odm.class' => 'Doctrine\\Bundle\\MongoDBBundle\\ManagerRegistry',
+            'doctrine_mongodb.odm.security.user.provider.class' => 'Symfony\\Bridge\\Doctrine\\Security\\User\\EntityUserProvider',
+            'doctrine_mongodb.odm.proxy_cache_warmer.class' => 'Doctrine\\Bundle\\MongoDBBundle\\CacheWarmer\\ProxyCacheWarmer',
+            'doctrine_mongodb.odm.hydrator_cache_warmer.class' => 'Doctrine\\Bundle\\MongoDBBundle\\CacheWarmer\\HydratorCacheWarmer',
+            'doctrine_mongodb.odm.cache.array.class' => 'Doctrine\\Common\\Cache\\ArrayCache',
+            'doctrine_mongodb.odm.cache.apc.class' => 'Doctrine\\Common\\Cache\\ApcCache',
+            'doctrine_mongodb.odm.cache.memcache.class' => 'Doctrine\\Common\\Cache\\MemcacheCache',
+            'doctrine_mongodb.odm.cache.memcache_host' => 'localhost',
+            'doctrine_mongodb.odm.cache.memcache_port' => 11211,
+            'doctrine_mongodb.odm.cache.memcache_instance.class' => 'Memcache',
+            'doctrine_mongodb.odm.cache.xcache.class' => 'Doctrine\\Common\\Cache\\XcacheCache',
+            'doctrine_mongodb.odm.metadata.driver_chain.class' => 'Doctrine\\Common\\Persistence\\Mapping\\Driver\\MappingDriverChain',
+            'doctrine_mongodb.odm.metadata.annotation.class' => 'Doctrine\\ODM\\MongoDB\\Mapping\\Driver\\AnnotationDriver',
+            'doctrine_mongodb.odm.metadata.xml.class' => 'Doctrine\\Bundle\\MongoDBBundle\\Mapping\\Driver\\XmlDriver',
+            'doctrine_mongodb.odm.metadata.yml.class' => 'Doctrine\\Bundle\\MongoDBBundle\\Mapping\\Driver\\YamlDriver',
+            'doctrine_mongodb.odm.mapping_dirs' => array(
 
             ),
-            'doctrine.connections' => array(
-                'default' => 'doctrine.dbal.default_connection',
+            'doctrine_mongodb.odm.xml_mapping_dirs' => array(
+
             ),
-            'doctrine.default_connection' => 'default',
-            'doctrine.orm.configuration.class' => 'Doctrine\\ORM\\Configuration',
-            'doctrine.orm.entity_manager.class' => 'Doctrine\\ORM\\EntityManager',
-            'doctrine.orm.manager_configurator.class' => 'Doctrine\\Bundle\\DoctrineBundle\\ManagerConfigurator',
-            'doctrine.orm.cache.array.class' => 'Doctrine\\Common\\Cache\\ArrayCache',
-            'doctrine.orm.cache.apc.class' => 'Doctrine\\Common\\Cache\\ApcCache',
-            'doctrine.orm.cache.memcache.class' => 'Doctrine\\Common\\Cache\\MemcacheCache',
-            'doctrine.orm.cache.memcache_host' => 'localhost',
-            'doctrine.orm.cache.memcache_port' => 11211,
-            'doctrine.orm.cache.memcache_instance.class' => 'Memcache',
-            'doctrine.orm.cache.memcached.class' => 'Doctrine\\Common\\Cache\\MemcachedCache',
-            'doctrine.orm.cache.memcached_host' => 'localhost',
-            'doctrine.orm.cache.memcached_port' => 11211,
-            'doctrine.orm.cache.memcached_instance.class' => 'Memcached',
-            'doctrine.orm.cache.redis.class' => 'Doctrine\\Common\\Cache\\RedisCache',
-            'doctrine.orm.cache.redis_host' => 'localhost',
-            'doctrine.orm.cache.redis_port' => 6379,
-            'doctrine.orm.cache.redis_instance.class' => 'Redis',
-            'doctrine.orm.cache.xcache.class' => 'Doctrine\\Common\\Cache\\XcacheCache',
-            'doctrine.orm.cache.wincache.class' => 'Doctrine\\Common\\Cache\\WinCacheCache',
-            'doctrine.orm.cache.zenddata.class' => 'Doctrine\\Common\\Cache\\ZendDataCache',
-            'doctrine.orm.metadata.driver_chain.class' => 'Doctrine\\ORM\\Mapping\\Driver\\DriverChain',
-            'doctrine.orm.metadata.annotation.class' => 'Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver',
-            'doctrine.orm.metadata.xml.class' => 'Doctrine\\ORM\\Mapping\\Driver\\SimplifiedXmlDriver',
-            'doctrine.orm.metadata.yml.class' => 'Doctrine\\ORM\\Mapping\\Driver\\SimplifiedYamlDriver',
-            'doctrine.orm.metadata.php.class' => 'Doctrine\\ORM\\Mapping\\Driver\\PHPDriver',
-            'doctrine.orm.metadata.staticphp.class' => 'Doctrine\\ORM\\Mapping\\Driver\\StaticPHPDriver',
-            'doctrine.orm.proxy_cache_warmer.class' => 'Symfony\\Bridge\\Doctrine\\CacheWarmer\\ProxyCacheWarmer',
-            'form.type_guesser.doctrine.class' => 'Symfony\\Bridge\\Doctrine\\Form\\DoctrineOrmTypeGuesser',
-            'doctrine.orm.validator.unique.class' => 'Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntityValidator',
-            'doctrine.orm.validator_initializer.class' => 'Symfony\\Bridge\\Doctrine\\Validator\\DoctrineInitializer',
-            'doctrine.orm.security.user.provider.class' => 'Symfony\\Bridge\\Doctrine\\Security\\User\\EntityUserProvider',
-            'doctrine.orm.listeners.resolve_target_entity.class' => 'Doctrine\\ORM\\Tools\\ResolveTargetEntityListener',
-            'doctrine.orm.naming_strategy.default.class' => 'Doctrine\\ORM\\Mapping\\DefaultNamingStrategy',
-            'doctrine.orm.naming_strategy.underscore.class' => 'Doctrine\\ORM\\Mapping\\UnderscoreNamingStrategy',
-            'doctrine.orm.auto_generate_proxy_classes' => true,
-            'doctrine.orm.proxy_dir' => 'D:/Dropbox/TW/Drool/app/cache/dev/doctrine/orm/Proxies',
-            'doctrine.orm.proxy_namespace' => 'Proxies',
+            'doctrine_mongodb.odm.yml_mapping_dirs' => array(
+
+            ),
+            'doctrine_mongodb.odm.document_dirs' => array(
+
+            ),
+            'doctrine_mongodb.odm.fixtures_dirs' => array(
+
+            ),
+            'doctrine_mongodb.odm.logger.batch_insert_threshold' => 4,
+            'doctrine_mongodb.odm.default_connection' => 'default',
+            'doctrine_mongodb.odm.default_document_manager' => 'default',
+            'doctrine_mongodb.odm.proxy_namespace' => 'MongoDBODMProxies',
+            'doctrine_mongodb.odm.proxy_dir' => 'D:/Dropbox/TW/Drool/drool/app/cache/dev/doctrine/odm/mongodb/Proxies',
+            'doctrine_mongodb.odm.auto_generate_proxy_classes' => false,
+            'doctrine_mongodb.odm.hydrator_namespace' => 'Hydrators',
+            'doctrine_mongodb.odm.hydrator_dir' => 'D:/Dropbox/TW/Drool/drool/app/cache/dev/doctrine/odm/mongodb/Hydrators',
+            'doctrine_mongodb.odm.auto_generate_hydrator_classes' => false,
+            'doctrine_mongodb.odm.default_commit_options' => array(
+
+            ),
+            'doctrine_mongodb.odm.connections' => array(
+                'default' => 'doctrine_mongodb.odm.default_connection',
+            ),
+            'doctrine_mongodb.odm.document_managers' => array(
+                'default' => 'doctrine_mongodb.odm.default_document_manager',
+            ),
             'sensio_framework_extra.view.guesser.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Templating\\TemplateGuesser',
             'sensio_framework_extra.controller.listener.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\ControllerListener',
             'sensio_framework_extra.routing.loader.annot_dir.class' => 'Symfony\\Component\\Routing\\Loader\\AnnotationDirectoryLoader',
@@ -3860,9 +3942,9 @@ class appDevDebugProjectContainer extends Container
                     0 => 'swiftmailer',
                     1 => '@Swiftmailer/Collector/swiftmailer.html.twig',
                 ),
-                'data_collector.doctrine' => array(
-                    0 => 'db',
-                    1 => 'DoctrineBundle:Collector:db',
+                'doctrine_mongodb.odm.data_collector.pretty' => array(
+                    0 => 'mongodb',
+                    1 => 'DoctrineMongoDBBundle:Collector:mongodb',
                 ),
             ),
         );

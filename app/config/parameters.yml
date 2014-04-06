@@ -12,3 +12,4 @@ parameters:
     mailer_password: null
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
+    mongodb_server:    mongodb://localhost:27017

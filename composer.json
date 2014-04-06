@@ -19,7 +19,10 @@
         "sensio/framework-extra-bundle": "2.3.*",
         "sensio/generator-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
-        "mashape/unirest-php" : "dev-master"
+        "mashape/unirest-php" : "dev-master",
+        "doctrine/mongodb-odm": "1.0.*@dev",
+        "doctrine/mongodb-odm-bundle": "3.0.*@dev",
+        "doctrine/mongodb": "1.0.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

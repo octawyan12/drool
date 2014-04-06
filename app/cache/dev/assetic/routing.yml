@@ -2,4 +2,4 @@ _assetic:
     resource: .
     type: assetic
 _app:
-    resource: 'D:/Dropbox/TW/Drool/app/config/routing_dev.yml'
+    resource: 'D:/Dropbox/TW/Drool/drool/app/config/routing_dev.yml'
