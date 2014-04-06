@@ -1,7 +1,7 @@
-Drool\CurrencyBundle\Entity\Currency:
-    type: entity
-    table: null
-    repositoryClass: Drool\CurrencyBundle\Entity\CurrencyRepository
+Drool\CurrencyBundle\Document\Currency:
+    type: document
+    collection: Album
+    repositoryClass: Drool\CurrencyBundle\Repository\CurrencyRepository
     fields:
         id:
             type: integer

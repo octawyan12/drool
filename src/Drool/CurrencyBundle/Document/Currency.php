@@ -1,39 +1,39 @@
 <?php
 
-namespace Drool\CurrencyBundle\Entity;
+namespace Drool\CurrencyBundle\Document;
 
-use Doctrine\ORM\Mapping as ORM;
+
 
 /**
- * Currency
+ * Drool\CurrencyBundle\Document\Currency
  */
 class Currency
 {
     /**
-     * @var integer
+     * @var MongoId $id
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var string
+     * @var string $name
      */
-    private $name;
+    protected $name;
 
     /**
-     * @var float
+     * @var float $value
      */
-    private $value;
+    protected $value;
 
     /**
-     * @var string
+     * @var string $shortName
      */
-    private $shortName;
+    protected $shortName;
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer $id
      */
     public function getId()
     {
@@ -44,19 +44,18 @@ class Currency
      * Set name
      *
      * @param string $name
-     * @return Currency
+     * @return self
      */
     public function setName($name)
     {
         $this->name = $name;
-    
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string $name
      */
     public function getName()
     {
@@ -67,19 +66,18 @@ class Currency
      * Set value
      *
      * @param float $value
-     * @return Currency
+     * @return self
      */
     public function setValue($value)
     {
         $this->value = $value;
-    
         return $this;
     }
 
     /**
      * Get value
      *
-     * @return float 
+     * @return float $value
      */
     public function getValue()
     {
@@ -90,26 +88,21 @@ class Currency
      * Set shortName
      *
      * @param string $shortName
-     * @return Currency
+     * @return self
      */
     public function setShortName($shortName)
     {
         $this->shortName = $shortName;
-    
         return $this;
     }
 
     /**
      * Get shortName
      *
-     * @return string 
+     * @return string $shortName
      */
     public function getShortName()
     {
-        return $this->shortName;
-    }
-    
-    public function __toString() {
         return $this->shortName;
     }
 }

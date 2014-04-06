@@ -61,15 +61,19 @@ assetic:
 doctrine_mongodb:
     connections:
         default:
-            server: mongodb://localhost:27017
-            options:
-                connect: true
-    default_database: hello_%kernel.environment%
+            server: %mongodb_server%
+            options: {}
+    default_database: %database_name%
     document_managers:
         default:
-            mappings:
-                AcmeDemoBundle: ~
-            metadata_cache_driver: array # array, apc, xcache, memcache
+            auto_mapping: true
+            retry_connect: 1
+            retry_query:   1
+            #mappings: 
+            #    ScPaUserBundle: ~
+            #    ScPaWebBundle: ~
+            #    ScPaAdminBundle: ~
+    default_commit_options:
 
 # Swiftmailer Configuration
 swiftmailer:
