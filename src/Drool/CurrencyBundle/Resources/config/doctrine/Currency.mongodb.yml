@@ -4,10 +4,7 @@ Drool\CurrencyBundle\Document\Currency:
     repositoryClass: Drool\CurrencyBundle\Repository\CurrencyRepository
     fields:
         id:
-            type: int
             id: true
-            generator:
-                strategy: AUTO
         name:
             type: string
             length: 255

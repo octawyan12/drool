@@ -103,4 +103,8 @@ class Currency
     {
         return $this->shortName;
     }
+    
+    public function __toString() {
+        return $this->shortName;
+    }
 }
