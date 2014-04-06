@@ -1,0 +1,7 @@
+parameters:
+    drool_currency.converter.class: Drool\CurrencyBundle\Service\CurrencyConverter
+
+services:
+    drool_currency.converter:
+        class: %drool_currency.converter.class%
+        arguments: [@service_container]

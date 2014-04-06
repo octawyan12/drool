@@ -1,0 +1,7 @@
+parameters:
+#    drool_api.example.class: Drool\ApiBundle\Example
+
+services:
+#    drool_api.example:
+#        class: %drool_api.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

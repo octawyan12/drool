@@ -1,0 +1,8 @@
+drool_api:
+    resource: "@DroolApiBundle/Resources/config/routing.yml"
+    prefix:   /api
+
+drool_currency:
+    resource: "@DroolCurrencyBundle/Resources/config/routing.yml"
+    prefix:   /
+

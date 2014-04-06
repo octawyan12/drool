@@ -1,0 +1,3 @@
+drool_currency_homepage:
+    pattern:  /
+    defaults: { _controller: DroolCurrencyBundle:Default:index }

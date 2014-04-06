@@ -1,0 +1,20 @@
+Drool\CurrencyBundle\Entity\Currency:
+    type: entity
+    table: null
+    repositoryClass: Drool\CurrencyBundle\Entity\CurrencyRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: 255
+        value:
+            type: float
+        shortName:
+            type: string
+            length: 255
+            column: short_name
+    lifecycleCallbacks: {  }

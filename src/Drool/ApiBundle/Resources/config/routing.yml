@@ -1,0 +1,3 @@
+drool_api_homepage:
+    pattern:  /
+    defaults: { _controller: DroolApiBundle:Default:index }
