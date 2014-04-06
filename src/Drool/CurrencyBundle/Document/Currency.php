@@ -2,8 +2,6 @@
 
 namespace Drool\CurrencyBundle\Document;
 
-
-
 /**
  * Drool\CurrencyBundle\Document\Currency
  */

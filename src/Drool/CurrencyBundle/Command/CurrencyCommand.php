@@ -5,7 +5,7 @@ namespace Drool\CurrencyBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Drool\CurrencyBundle\Entity\Currency;
+use Drool\CurrencyBundle\Document\Currency;
 
 /**
  * Description of CurrencyCommand
@@ -25,19 +25,19 @@ class CurrencyCommand extends ContainerAwareCommand
         $json_url = "https://bitpay.com/api/rates";
         $json = file_get_contents($json_url);
         $data = json_decode($json);
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $dm = $this->getContainer()->get('doctrine_mongodb')->getManager();
         foreach($data as $currency) {
-            if($currencyObject = $em->getRepository('DroolCurrencyBundle:Currency')->findOneBy(array('shortName' => $currency->code))) {
+            if($currencyObject = $dm->getRepository('DroolCurrencyBundle:Currency')->findOneBy(array('shortName' => $currency->code))) {
                 $currencyObject->setValue($currency->rate);
-                $em->persist($currencyObject);
+                $dm->persist($currencyObject);
             } else {
                 $currencyObject = new Currency();
                 $currencyObject->setName($currency->name);
                 $currencyObject->setValue($currency->rate);
                 $currencyObject->setShortName($currency->code);
-                $em->persist($currencyObject);
+                $dm->persist($currencyObject);
             }
         }
-        $em->flush();
+        $dm->flush();
     }
 }

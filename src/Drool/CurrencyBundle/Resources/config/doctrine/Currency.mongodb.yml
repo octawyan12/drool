@@ -1,10 +1,10 @@
 Drool\CurrencyBundle\Document\Currency:
     type: document
-    collection: Album
+    collection: Currency
     repositoryClass: Drool\CurrencyBundle\Repository\CurrencyRepository
     fields:
         id:
-            type: integer
+            type: int
             id: true
             generator:
                 strategy: AUTO

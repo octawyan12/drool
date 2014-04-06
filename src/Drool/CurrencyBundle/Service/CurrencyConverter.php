@@ -20,10 +20,10 @@ class CurrencyConverter {
         $this->service_container = $service_container;
     }
     public function convertValues($from_value, $from_currency_id, $to_currency_id) {
-        $em = $this->service_container->get('doctrine.orm.entity_manager');
+        $dm = $this->service_container->get('doctrine_mongodb')->getManager();
         
-        $from_currency = $em->getRepository('DroolCurrencyBundle:Currency')->find($from_currency_id);
-        $to_currency = $em->getRepository('DroolCurrencyBundle:Currency')->find($to_currency_id);
+        $from_currency = $dm->getRepository('DroolCurrencyBundle:Currency')->find($from_currency_id);
+        $to_currency = $dm->getRepository('DroolCurrencyBundle:Currency')->find($to_currency_id);
         
         $result = $from_value * ($to_currency->getValue() / $from_currency->getValue());
         return $result;

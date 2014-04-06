@@ -19,9 +19,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class ConvertType extends AbstractType {
 
-    private $em;
-    public function __construct($em) {
-        $this->em = $em;
+    private $dm;
+    public function __construct($dm) {
+        $this->dm = $dm;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
@@ -30,16 +30,16 @@ class ConvertType extends AbstractType {
             ->add('currency_amount', 'text', array(
                 'mapped' => false
             ))
-            ->add('from_currency', 'entity', array( 
+            ->add('from_currency', 'document', array( 
                       'mapped' => false,
                       'class' => 'DroolCurrencyBundle:Currency',
-                      'choices' => $this->em->getRepository('DroolCurrencyBundle:Currency')->findAll(),
+                      'choices' => $this->dm->getRepository('DroolCurrencyBundle:Currency')->findAll(),
                       'empty_value' => 'Currency 1',
             ))
-            ->add('to_currency', 'entity', array(    
+            ->add('to_currency', 'document', array(    
                       'mapped' => false,
                       'class' => 'DroolCurrencyBundle:Currency',
-                      'choices' => $this->em->getRepository('DroolCurrencyBundle:Currency')->findAll(),
+                      'choices' => $this->dm->getRepository('DroolCurrencyBundle:Currency')->findAll(),
                       'empty_value' => 'Currency 2',
             ));  
     }

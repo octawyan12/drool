@@ -10,8 +10,8 @@ class DefaultController extends Controller
 {
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new ConvertType($em), array());
+        $dm = $this->getDocumentManager();
+        $form = $this->createForm(new ConvertType($dm), array());
         $result = null;
         if($request->isMethod('post')) {
             $form->bind($request);
@@ -33,5 +33,10 @@ class DefaultController extends Controller
             'result' => $result, 
             'form' => $form->createView()
         ));
+    }
+    
+    private function getDocumentManager()
+    {
+        return $this->get('doctrine.odm.mongodb.document_manager');
     }
 }
