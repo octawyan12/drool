@@ -156,9 +156,9 @@
 { "_id" : { "$oid" : "534161a7884dac001a00009b" }, "is_virtual" : false, "name" : "South African Rand", "shortName" : "ZAR", "value" : 4794.4909 }
 { "_id" : { "$oid" : "534161a7884dac001a00009c" }, "is_virtual" : false, "name" : "Zambian Kwacha", "shortName" : "ZMW", "value" : 2792.2055 }
 { "_id" : { "$oid" : "534161a7884dac001a00009d" }, "is_virtual" : false, "name" : "Zimbabwean Dollar", "shortName" : "ZWL", "value" : 146352.3963 }
-{ "_id" : { "$oid" : "53416a72da2116f30773f97e" }, "is_virtual" : false, "name" : "IMVU Credits", "shortName" : "IC", "value" : 0.16463116922 }
-{ "_id" : { "$oid" : "53416aa9da2116f30773f97f" }, "is_virtual" : false, "name" : "Lindens", "shortName" : "LD", "value" : 1.76326974292 }
-{ "_id" : { "$oid" : "53416ab5da2116f30773f980" }, "is_virtual" : false, "name" : "Toricredits", "shortName" : "TC", "value" : 0.02878548298 }
-{ "_id" : { "$oid" : "53416b1ada2116f30773f981" }, "is_virtual" : false, "name" : "Frenzoo Gold Coins", "shortName" : "FG", "value" : 0.9080594000000001 }
-{ "_id" : { "$oid" : "53416b27da2116f30773f982" }, "is_virtual" : false, "name" : "FriendsHangout Tokens", "shortName" : "FH", "value" : 0.07654940741999999 }
-{ "_id" : { "$oid" : "53416b34da2116f30773f983" }, "is_virtual" : false, "name" : "NuVera Note", "shortName" : "NN", "value" : 4.540297 }
+{ "_id" : { "$oid" : "53416a72da2116f30773f97e" }, "is_virtual" : true, "name" : "IMVU Credits", "shortName" : "IC", "value" : 0.16463116922 }
+{ "_id" : { "$oid" : "53416aa9da2116f30773f97f" }, "is_virtual" : true, "name" : "Lindens", "shortName" : "LD", "value" : 1.76326974292 }
+{ "_id" : { "$oid" : "53416ab5da2116f30773f980" }, "is_virtual" : true, "name" : "Toricredits", "shortName" : "TC", "value" : 0.02878548298 }
+{ "_id" : { "$oid" : "53416b1ada2116f30773f981" }, "is_virtual" : true, "name" : "Frenzoo Gold Coins", "shortName" : "FG", "value" : 0.9080594000000001 }
+{ "_id" : { "$oid" : "53416b27da2116f30773f982" }, "is_virtual" : true, "name" : "FriendsHangout Tokens", "shortName" : "FH", "value" : 0.07654940741999999 }
+{ "_id" : { "$oid" : "53416b34da2116f30773f983" }, "is_virtual" : true, "name" : "NuVera Note", "shortName" : "NN", "value" : 4.540297 }
