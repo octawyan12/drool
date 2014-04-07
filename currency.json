@@ -1,0 +1,164 @@
+{ "_id" : { "$oid" : "534161a7884dac001a000000" }, "is_virtual" : false, "name" : "US Dollar", "shortName" : "USD", "value" : 454.0297 }
+{ "_id" : { "$oid" : "534161a7884dac001a000001" }, "is_virtual" : false, "name" : "Eurozone Euro", "shortName" : "EUR", "value" : 331.3133 }
+{ "_id" : { "$oid" : "534161a7884dac001a000002" }, "is_virtual" : false, "name" : "Pound Sterling", "shortName" : "GBP", "value" : 273.9006 }
+{ "_id" : { "$oid" : "534161a7884dac001a000003" }, "is_virtual" : false, "name" : "Japanese Yen", "shortName" : "JPY", "value" : 46894.6026 }
+{ "_id" : { "$oid" : "534161a7884dac001a000004" }, "is_virtual" : false, "name" : "Canadian Dollar", "shortName" : "CAD", "value" : 498.5325 }
+{ "_id" : { "$oid" : "534161a7884dac001a000005" }, "is_virtual" : false, "name" : "Australian Dollar", "shortName" : "AUD", "value" : 488.6587 }
+{ "_id" : { "$oid" : "534161a7884dac001a000006" }, "is_virtual" : false, "name" : "Chinese Yuan", "shortName" : "CNY", "value" : 2816.5845 }
+{ "_id" : { "$oid" : "534161a7884dac001a000007" }, "is_virtual" : false, "name" : "Swiss Franc", "shortName" : "CHF", "value" : 405.0296 }
+{ "_id" : { "$oid" : "534161a7884dac001a000008" }, "is_virtual" : false, "name" : "Swedish Krona", "shortName" : "SEK", "value" : 2976.5454 }
+{ "_id" : { "$oid" : "534161a7884dac001a000009" }, "is_virtual" : false, "name" : "New Zealand Dollar", "shortName" : "NZD", "value" : 528.0898999999999 }
+{ "_id" : { "$oid" : "534161a7884dac001a00000a" }, "is_virtual" : false, "name" : "South Korean Won", "shortName" : "KRW", "value" : 478318.4463 }
+{ "_id" : { "$oid" : "534161a7884dac001a00000b" }, "is_virtual" : false, "name" : "UAE Dirham", "shortName" : "AED", "value" : 1667.5015 }
+{ "_id" : { "$oid" : "534161a7884dac001a00000c" }, "is_virtual" : false, "name" : "Afghan Afghani", "shortName" : "AFN", "value" : 25906.9456 }
+{ "_id" : { "$oid" : "534161a7884dac001a00000d" }, "is_virtual" : false, "name" : "Albanian Lek", "shortName" : "ALL", "value" : 46319.8254 }
+{ "_id" : { "$oid" : "534161a7884dac001a00000e" }, "is_virtual" : false, "name" : "Armenian Dram", "shortName" : "AMD", "value" : 189591.3984 }
+{ "_id" : { "$oid" : "534161a7884dac001a00000f" }, "is_virtual" : false, "name" : "Netherlands Antillean Guilder", "shortName" : "ANG", "value" : 812.2148 }
+{ "_id" : { "$oid" : "534161a7884dac001a000010" }, "is_virtual" : false, "name" : "Angolan Kwanza", "shortName" : "AOA", "value" : 44370.0232 }
+{ "_id" : { "$oid" : "534161a7884dac001a000011" }, "is_virtual" : false, "name" : "Argentine Peso", "shortName" : "ARS", "value" : 3632.9013 }
+{ "_id" : { "$oid" : "534161a7884dac001a000012" }, "is_virtual" : false, "name" : "Aruban Florin", "shortName" : "AWG", "value" : 810.4078 }
+{ "_id" : { "$oid" : "534161a7884dac001a000013" }, "is_virtual" : false, "name" : "Azerbaijani Manat", "shortName" : "AZN", "value" : 356.0346 }
+{ "_id" : { "$oid" : "534161a7884dac001a000014" }, "is_virtual" : false, "name" : "Bosnia-Herzegovina Convertible Mark", "shortName" : "BAM", "value" : 648.3145 }
+{ "_id" : { "$oid" : "534161a7884dac001a000015" }, "is_virtual" : false, "name" : "Barbadian Dollar", "shortName" : "BBD", "value" : 908.02 }
+{ "_id" : { "$oid" : "534161a7884dac001a000016" }, "is_virtual" : false, "name" : "Bangladeshi Taka", "shortName" : "BDT", "value" : 35266.1348 }
+{ "_id" : { "$oid" : "534161a7884dac001a000017" }, "is_virtual" : false, "name" : "Bulgarian Lev", "shortName" : "BGN", "value" : 648.5324000000001 }
+{ "_id" : { "$oid" : "534161a7884dac001a000018" }, "is_virtual" : false, "name" : "Bahraini Dinar", "shortName" : "BHD", "value" : 171.1373 }
+{ "_id" : { "$oid" : "534161a7884dac001a000019" }, "is_virtual" : false, "name" : "Burundian Franc", "shortName" : "BIF", "value" : 701754.9336 }
+{ "_id" : { "$oid" : "534161a7884dac001a00001a" }, "is_virtual" : false, "name" : "Bermudan Dollar", "shortName" : "BMD", "value" : 454.01 }
+{ "_id" : { "$oid" : "534161a7884dac001a00001b" }, "is_virtual" : false, "name" : "Brunei Dollar", "shortName" : "BND", "value" : 573.0342000000001 }
+{ "_id" : { "$oid" : "534161a7884dac001a00001c" }, "is_virtual" : false, "name" : "Bolivian Boliviano", "shortName" : "BOB", "value" : 3137.1687 }
+{ "_id" : { "$oid" : "534161a7884dac001a00001d" }, "is_virtual" : false, "name" : "Brasilian Real", "shortName" : "BRL", "value" : 1015.6994 }
+{ "_id" : { "$oid" : "534161a7884dac001a00001e" }, "is_virtual" : false, "name" : "Bahamian Dollar", "shortName" : "BSD", "value" : 454.01 }
+{ "_id" : { "$oid" : "534161a7884dac001a00001f" }, "is_virtual" : false, "name" : "Bhutanese Ngultrum", "shortName" : "BTN", "value" : 27301.4033 }
+{ "_id" : { "$oid" : "534161a7884dac001a000020" }, "is_virtual" : false, "name" : "Botswanan Pula", "shortName" : "BWP", "value" : 3999.281 }
+{ "_id" : { "$oid" : "534161a7884dac001a000021" }, "is_virtual" : false, "name" : "Belarusian Ruble", "shortName" : "BYR", "value" : 4499288.2843 }
+{ "_id" : { "$oid" : "534161a7884dac001a000022" }, "is_virtual" : false, "name" : "Belize Dollar", "shortName" : "BZD", "value" : 914.3775000000001 }
+{ "_id" : { "$oid" : "534161a7884dac001a000023" }, "is_virtual" : false, "name" : "Congolese Franc", "shortName" : "CDF", "value" : 419013.396 }
+{ "_id" : { "$oid" : "534161a7884dac001a000024" }, "is_virtual" : false, "name" : "Chilean Unit of Account (UF)", "shortName" : "CLF", "value" : 10.6692 }
+{ "_id" : { "$oid" : "534161a7884dac001a000025" }, "is_virtual" : false, "name" : "Chilean Peso", "shortName" : "CLP", "value" : 252111.7557 }
+{ "_id" : { "$oid" : "534161a7884dac001a000026" }, "is_virtual" : false, "name" : "Colombian Peso", "shortName" : "COP", "value" : 885858.2510000001 }
+{ "_id" : { "$oid" : "534161a7884dac001a000027" }, "is_virtual" : false, "name" : "Costa Rican Colón", "shortName" : "CRC", "value" : 248778.6849 }
+{ "_id" : { "$oid" : "534161a7884dac001a000028" }, "is_virtual" : false, "name" : "Cape Verdean Escudo", "shortName" : "CVE", "value" : 36403.4162 }
+{ "_id" : { "$oid" : "534161a7884dac001a000029" }, "is_virtual" : false, "name" : "Czech Koruna", "shortName" : "CZK", "value" : 9090.4152 }
+{ "_id" : { "$oid" : "534161a7884dac001a00002a" }, "is_virtual" : false, "name" : "Djiboutian Franc", "shortName" : "DJF", "value" : 80500.64930000001 }
+{ "_id" : { "$oid" : "534161a7884dac001a00002b" }, "is_virtual" : false, "name" : "Danish Krone", "shortName" : "DKK", "value" : 2473.3094 }
+{ "_id" : { "$oid" : "534161a7884dac001a00002c" }, "is_virtual" : false, "name" : "Dominican Peso", "shortName" : "DOP", "value" : 19561.6428 }
+{ "_id" : { "$oid" : "534161a7884dac001a00002d" }, "is_virtual" : false, "name" : "Algerian Dinar", "shortName" : "DZD", "value" : 35734.0779 }
+{ "_id" : { "$oid" : "534161a7884dac001a00002e" }, "is_virtual" : false, "name" : "Estonian Kroon", "shortName" : "EEK", "value" : 5291.1233 }
+{ "_id" : { "$oid" : "534161a7884dac001a00002f" }, "is_virtual" : false, "name" : "Egyptian Pound", "shortName" : "EGP", "value" : 3164.5124 }
+{ "_id" : { "$oid" : "534161a7884dac001a000030" }, "is_virtual" : false, "name" : "Ethiopian Birr", "shortName" : "ETB", "value" : 8825.0191 }
+{ "_id" : { "$oid" : "534161a7884dac001a000031" }, "is_virtual" : false, "name" : "Fijian Dollar", "shortName" : "FJD", "value" : 839.9398 }
+{ "_id" : { "$oid" : "534161a7884dac001a000032" }, "is_virtual" : false, "name" : "Falkland Islands Pound", "shortName" : "FKP", "value" : 273.9006 }
+{ "_id" : { "$oid" : "534161a7884dac001a000033" }, "is_virtual" : false, "name" : "Georgian Lari", "shortName" : "GEL", "value" : 796.4697 }
+{ "_id" : { "$oid" : "534161a7884dac001a000034" }, "is_virtual" : false, "name" : "Ghanaian Cedi", "shortName" : "GHS", "value" : 1225.2767 }
+{ "_id" : { "$oid" : "534161a7884dac001a000035" }, "is_virtual" : false, "name" : "Gibraltar Pound", "shortName" : "GIP", "value" : 273.9006 }
+{ "_id" : { "$oid" : "534161a7884dac001a000036" }, "is_virtual" : false, "name" : "Gambian Dalasi", "shortName" : "GMD", "value" : 17299.143 }
+{ "_id" : { "$oid" : "534161a7884dac001a000037" }, "is_virtual" : false, "name" : "Guinean Franc", "shortName" : "GNF", "value" : 3188320.789 }
+{ "_id" : { "$oid" : "534161a7884dac001a000038" }, "is_virtual" : false, "name" : "Guatemalan Quetzal", "shortName" : "GTQ", "value" : 3524.1128 }
+{ "_id" : { "$oid" : "534161a7884dac001a000039" }, "is_virtual" : false, "name" : "Guyanaese Dollar", "shortName" : "GYD", "value" : 92834.26179999999 }
+{ "_id" : { "$oid" : "534161a7884dac001a00003a" }, "is_virtual" : false, "name" : "Hong Kong Dollar", "shortName" : "HKD", "value" : 3521.7274 }
+{ "_id" : { "$oid" : "534161a7884dac001a00003b" }, "is_virtual" : false, "name" : "Honduran Lempira", "shortName" : "HNL", "value" : 8725.3231 }
+{ "_id" : { "$oid" : "534161a7884dac001a00003c" }, "is_virtual" : false, "name" : "Croatian Kuna", "shortName" : "HRK", "value" : 2530.2472 }
+{ "_id" : { "$oid" : "534161a7884dac001a00003d" }, "is_virtual" : false, "name" : "Haitian Gourde", "shortName" : "HTG", "value" : 20264.7591 }
+{ "_id" : { "$oid" : "534161a7884dac001a00003e" }, "is_virtual" : false, "name" : "Hungarian Forint", "shortName" : "HUF", "value" : 101289.2224 }
+{ "_id" : { "$oid" : "534161a7884dac001a00003f" }, "is_virtual" : false, "name" : "Indonesian Rupiah", "shortName" : "IDR", "value" : 5139105.6605 }
+{ "_id" : { "$oid" : "534161a7884dac001a000040" }, "is_virtual" : false, "name" : "Israeli Shekel", "shortName" : "ILS", "value" : 1580.1918 }
+{ "_id" : { "$oid" : "534161a7884dac001a000041" }, "is_virtual" : false, "name" : "Indian Rupee", "shortName" : "INR", "value" : 27223.5746 }
+{ "_id" : { "$oid" : "534161a7884dac001a000042" }, "is_virtual" : false, "name" : "Iraqi Dinar", "shortName" : "IQD", "value" : 528705.9989 }
+{ "_id" : { "$oid" : "534161a7884dac001a000043" }, "is_virtual" : false, "name" : "Icelandic Króna", "shortName" : "ISK", "value" : 51311.3022 }
+{ "_id" : { "$oid" : "534161a7884dac001a000044" }, "is_virtual" : false, "name" : "Jersey Pound", "shortName" : "JEP", "value" : 273.9006 }
+{ "_id" : { "$oid" : "534161a7884dac001a000045" }, "is_virtual" : false, "name" : "Jamaican Dollar", "shortName" : "JMD", "value" : 49643.1328 }
+{ "_id" : { "$oid" : "534161a7884dac001a000046" }, "is_virtual" : false, "name" : "Jordanian Dinar", "shortName" : "JOD", "value" : 321.5399 }
+{ "_id" : { "$oid" : "534161a7884dac001a000047" }, "is_virtual" : false, "name" : "Kenyan Shilling", "shortName" : "KES", "value" : 39354.4535 }
+{ "_id" : { "$oid" : "534161a7884dac001a000048" }, "is_virtual" : false, "name" : "Kyrgystani Som", "shortName" : "KGS", "value" : 24738.5504 }
+{ "_id" : { "$oid" : "534161a7884dac001a000049" }, "is_virtual" : false, "name" : "Cambodian Riel", "shortName" : "KHR", "value" : 1818058.7101 }
+{ "_id" : { "$oid" : "534161a7884dac001a00004a" }, "is_virtual" : false, "name" : "Comorian Franc", "shortName" : "KMF", "value" : 163049.4726 }
+{ "_id" : { "$oid" : "534161a7884dac001a00004b" }, "is_virtual" : false, "name" : "Kuwaiti Dinar", "shortName" : "KWD", "value" : 128.0853 }
+{ "_id" : { "$oid" : "534161a7884dac001a00004c" }, "is_virtual" : false, "name" : "Cayman Islands Dollar", "shortName" : "KYD", "value" : 375.3133 }
+{ "_id" : { "$oid" : "534161a7884dac001a00004d" }, "is_virtual" : false, "name" : "Kazakhstani Tenge", "shortName" : "KZT", "value" : 82669.59080000001 }
+{ "_id" : { "$oid" : "534161a7884dac001a00004e" }, "is_virtual" : false, "name" : "Laotian Kip", "shortName" : "LAK", "value" : 3652633.76 }
+{ "_id" : { "$oid" : "534161a7884dac001a00004f" }, "is_virtual" : false, "name" : "Lebanese Pound", "shortName" : "LBP", "value" : 684403.4278 }
+{ "_id" : { "$oid" : "534161a7884dac001a000050" }, "is_virtual" : false, "name" : "Sri Lankan Rupee", "shortName" : "LKR", "value" : 59281.3574 }
+{ "_id" : { "$oid" : "534161a7884dac001a000051" }, "is_virtual" : false, "name" : "Liberian Dollar", "shortName" : "LRD", "value" : 38817.855 }
+{ "_id" : { "$oid" : "534161a7884dac001a000052" }, "is_virtual" : false, "name" : "Lesotho Loti", "shortName" : "LSL", "value" : 4801.6824 }
+{ "_id" : { "$oid" : "534161a7884dac001a000053" }, "is_virtual" : false, "name" : "Lithuanian Litas", "shortName" : "LTL", "value" : 1144.112 }
+{ "_id" : { "$oid" : "534161a7884dac001a000054" }, "is_virtual" : false, "name" : "Latvian Lats", "shortName" : "LVL", "value" : 232.0949 }
+{ "_id" : { "$oid" : "534161a7884dac001a000055" }, "is_virtual" : false, "name" : "Libyan Dinar", "shortName" : "LYD", "value" : 565.1044000000001 }
+{ "_id" : { "$oid" : "534161a7884dac001a000056" }, "is_virtual" : false, "name" : "Moroccan Dirham", "shortName" : "MAD", "value" : 3719.5591 }
+{ "_id" : { "$oid" : "534161a7884dac001a000057" }, "is_virtual" : false, "name" : "Moldovan Leu", "shortName" : "MDL", "value" : 6063.6032 }
+{ "_id" : { "$oid" : "534161a7884dac001a000058" }, "is_virtual" : false, "name" : "Malagasy Ariary", "shortName" : "MGA", "value" : 1073742.7302 }
+{ "_id" : { "$oid" : "534161a7884dac001a000059" }, "is_virtual" : false, "name" : "Macedonian Denar", "shortName" : "MKD", "value" : 20427.3991 }
+{ "_id" : { "$oid" : "534161a7884dac001a00005a" }, "is_virtual" : false, "name" : "Myanma Kyat", "shortName" : "MMK", "value" : 436919.293 }
+{ "_id" : { "$oid" : "534161a7884dac001a00005b" }, "is_virtual" : false, "name" : "Mongolian Tugrik", "shortName" : "MNT", "value" : 806246.0915 }
+{ "_id" : { "$oid" : "534161a7884dac001a00005c" }, "is_virtual" : false, "name" : "Macanese Pataca", "shortName" : "MOP", "value" : 3627.4477 }
+{ "_id" : { "$oid" : "534161a7884dac001a00005d" }, "is_virtual" : false, "name" : "Mauritanian Ouguiya", "shortName" : "MRO", "value" : 132729.2796 }
+{ "_id" : { "$oid" : "534161a7884dac001a00005e" }, "is_virtual" : false, "name" : "Mauritian Rupee", "shortName" : "MUR", "value" : 13687.9293 }
+{ "_id" : { "$oid" : "534161a7884dac001a00005f" }, "is_virtual" : false, "name" : "Maldivian Rufiyaa", "shortName" : "MVR", "value" : 6982.6738 }
+{ "_id" : { "$oid" : "534161a7884dac001a000060" }, "is_virtual" : false, "name" : "Malawian Kwacha", "shortName" : "MWK", "value" : 186951.1482 }
+{ "_id" : { "$oid" : "534161a7884dac001a000061" }, "is_virtual" : false, "name" : "Mexican Peso", "shortName" : "MXN", "value" : 5904.6225 }
+{ "_id" : { "$oid" : "534161a7884dac001a000062" }, "is_virtual" : false, "name" : "Malaysian Ringgit", "shortName" : "MYR", "value" : 1488.8259 }
+{ "_id" : { "$oid" : "534161a7884dac001a000063" }, "is_virtual" : false, "name" : "Mozambican Metical", "shortName" : "MZN", "value" : 14235.4836 }
+{ "_id" : { "$oid" : "534161a7884dac001a000064" }, "is_virtual" : false, "name" : "Namibian Dollar", "shortName" : "NAD", "value" : 4800.5292 }
+{ "_id" : { "$oid" : "534161a7884dac001a000065" }, "is_virtual" : false, "name" : "Nigerian Naira", "shortName" : "NGN", "value" : 74319.4394 }
+{ "_id" : { "$oid" : "534161a7884dac001a000066" }, "is_virtual" : false, "name" : "Nicaraguan Córdoba", "shortName" : "NIO", "value" : 11665.2966 }
+{ "_id" : { "$oid" : "534161a7884dac001a000067" }, "is_virtual" : false, "name" : "Norwegian Krone", "shortName" : "NOK", "value" : 2724.0818 }
+{ "_id" : { "$oid" : "534161a7884dac001a000068" }, "is_virtual" : false, "name" : "Nepalese Rupee", "shortName" : "NPR", "value" : 43731.6057 }
+{ "_id" : { "$oid" : "534161a7884dac001a000069" }, "is_virtual" : false, "name" : "Omani Rial", "shortName" : "OMR", "value" : 174.758 }
+{ "_id" : { "$oid" : "534161a7884dac001a00006a" }, "is_virtual" : false, "name" : "Panamanian Balboa", "shortName" : "PAB", "value" : 454.01 }
+{ "_id" : { "$oid" : "534161a7884dac001a00006b" }, "is_virtual" : false, "name" : "Peruvian Nuevo Sol", "shortName" : "PEN", "value" : 1274.037 }
+{ "_id" : { "$oid" : "534161a7884dac001a00006c" }, "is_virtual" : false, "name" : "Papua New Guinean Kina", "shortName" : "PGK", "value" : 1223.8866 }
+{ "_id" : { "$oid" : "534161a7884dac001a00006d" }, "is_virtual" : false, "name" : "Philippine Peso", "shortName" : "PHP", "value" : 20412.957 }
+{ "_id" : { "$oid" : "534161a7884dac001a00006e" }, "is_virtual" : false, "name" : "Pakistani Rupee", "shortName" : "PKR", "value" : 44550.0495 }
+{ "_id" : { "$oid" : "534161a7884dac001a00006f" }, "is_virtual" : false, "name" : "Polish Zloty", "shortName" : "PLN", "value" : 1379.1952 }
+{ "_id" : { "$oid" : "534161a7884dac001a000070" }, "is_virtual" : false, "name" : "Paraguayan Guarani", "shortName" : "PYG", "value" : 2021645.9896 }
+{ "_id" : { "$oid" : "534161a7884dac001a000071" }, "is_virtual" : false, "name" : "Qatari Rial", "shortName" : "QAR", "value" : 1653.4136 }
+{ "_id" : { "$oid" : "534161a7884dac001a000072" }, "is_virtual" : false, "name" : "Romanian Leu", "shortName" : "RON", "value" : 1477.6028 }
+{ "_id" : { "$oid" : "534161a7884dac001a000073" }, "is_virtual" : false, "name" : "Serbian Dinar", "shortName" : "RSD", "value" : 38258.6418 }
+{ "_id" : { "$oid" : "534161a7884dac001a000074" }, "is_virtual" : false, "name" : "Russian Ruble", "shortName" : "RUB", "value" : 16025.6087 }
+{ "_id" : { "$oid" : "534161a7884dac001a000075" }, "is_virtual" : false, "name" : "Rwandan Franc", "shortName" : "RWF", "value" : 309187.7564 }
+{ "_id" : { "$oid" : "534161a7884dac001a000076" }, "is_virtual" : false, "name" : "Saudi Riyal", "shortName" : "SAR", "value" : 1702.8962 }
+{ "_id" : { "$oid" : "534161a7884dac001a000077" }, "is_virtual" : false, "name" : "Solomon Islands Dollar", "shortName" : "SBD", "value" : 3298.4035 }
+{ "_id" : { "$oid" : "534161a7884dac001a000078" }, "is_virtual" : false, "name" : "Seychellois Rupee", "shortName" : "SCR", "value" : 5446.9487 }
+{ "_id" : { "$oid" : "534161a7884dac001a000079" }, "is_virtual" : false, "name" : "Sudanese Pound", "shortName" : "SDG", "value" : 2582.694 }
+{ "_id" : { "$oid" : "534161a7884dac001a00007a" }, "is_virtual" : false, "name" : "Singapore Dollar", "shortName" : "SGD", "value" : 571.4846 }
+{ "_id" : { "$oid" : "534161a7884dac001a00007b" }, "is_virtual" : false, "name" : "Saint Helena Pound", "shortName" : "SHP", "value" : 273.9006 }
+{ "_id" : { "$oid" : "534161a7884dac001a00007c" }, "is_virtual" : false, "name" : "Sierra Leonean Leone", "shortName" : "SLL", "value" : 1963744.5865 }
+{ "_id" : { "$oid" : "534161a7884dac001a00007d" }, "is_virtual" : false, "name" : "Somali Shilling", "shortName" : "SOS", "value" : 446510.2088 }
+{ "_id" : { "$oid" : "534161a7884dac001a00007e" }, "is_virtual" : false, "name" : "Surinamese Dollar", "shortName" : "SRD", "value" : 1485.7477 }
+{ "_id" : { "$oid" : "534161a7884dac001a00007f" }, "is_virtual" : false, "name" : "São Tomé and Príncipe Dobra", "shortName" : "STD", "value" : 8126499.1482 }
+{ "_id" : { "$oid" : "534161a7884dac001a000080" }, "is_virtual" : false, "name" : "Salvadoran Colón", "shortName" : "SVC", "value" : 3971.8743 }
+{ "_id" : { "$oid" : "534161a7884dac001a000081" }, "is_virtual" : false, "name" : "Syrian Pound", "shortName" : "SYP", "value" : 64944.995 }
+{ "_id" : { "$oid" : "534161a7884dac001a000082" }, "is_virtual" : false, "name" : "Swazi Lilangeni", "shortName" : "SZL", "value" : 4800.502 }
+{ "_id" : { "$oid" : "534161a7884dac001a000083" }, "is_virtual" : false, "name" : "Thai Baht", "shortName" : "THB", "value" : 14738.681 }
+{ "_id" : { "$oid" : "534161a7884dac001a000084" }, "is_virtual" : false, "name" : "Tajikistani Somoni", "shortName" : "TJS", "value" : 2201.9939 }
+{ "_id" : { "$oid" : "534161a7884dac001a000085" }, "is_virtual" : false, "name" : "Turkmenistani Manat", "shortName" : "TMT", "value" : 1293.9285 }
+{ "_id" : { "$oid" : "534161a7884dac001a000086" }, "is_virtual" : false, "name" : "Tunisian Dinar", "shortName" : "TND", "value" : 722.4026 }
+{ "_id" : { "$oid" : "534161a7884dac001a000087" }, "is_virtual" : false, "name" : "Tongan Paʻanga", "shortName" : "TOP", "value" : 834.4481 }
+{ "_id" : { "$oid" : "534161a7884dac001a000088" }, "is_virtual" : false, "name" : "Turkish Lira", "shortName" : "TRY", "value" : 959.6464 }
+{ "_id" : { "$oid" : "534161a7884dac001a000089" }, "is_virtual" : false, "name" : "Trinidad and Tobago Dollar", "shortName" : "TTD", "value" : 2924.0977 }
+{ "_id" : { "$oid" : "534161a7884dac001a00008a" }, "is_virtual" : false, "name" : "New Taiwan Dollar", "shortName" : "TWD", "value" : 13730.2975 }
+{ "_id" : { "$oid" : "534161a7884dac001a00008b" }, "is_virtual" : false, "name" : "Tanzanian Shilling", "shortName" : "TZS", "value" : 740577.3287 }
+{ "_id" : { "$oid" : "534161a7884dac001a00008c" }, "is_virtual" : false, "name" : "Ukrainian Hryvnia", "shortName" : "UAH", "value" : 5267.5466 }
+{ "_id" : { "$oid" : "534161a7884dac001a00008d" }, "is_virtual" : false, "name" : "Ugandan Shilling", "shortName" : "UGX", "value" : 1163945.437 }
+{ "_id" : { "$oid" : "534161a7884dac001a00008e" }, "is_virtual" : false, "name" : "Uruguayan Peso", "shortName" : "UYU", "value" : 10375.209 }
+{ "_id" : { "$oid" : "534161a7884dac001a00008f" }, "is_virtual" : false, "name" : "Uzbekistan Som", "shortName" : "UZS", "value" : 1028008.7792 }
+{ "_id" : { "$oid" : "534161a7884dac001a000090" }, "is_virtual" : false, "name" : "Venezuelan Bolívar Fuerte", "shortName" : "VEF", "value" : 2856.9033 }
+{ "_id" : { "$oid" : "534161a7884dac001a000091" }, "is_virtual" : false, "name" : "Vietnamese Dong", "shortName" : "VND", "value" : 9574140.179500001 }
+{ "_id" : { "$oid" : "534161a7884dac001a000092" }, "is_virtual" : false, "name" : "Vanuatu Vatu", "shortName" : "VUV", "value" : 42968.641 }
+{ "_id" : { "$oid" : "534161a7884dac001a000093" }, "is_virtual" : false, "name" : "Samoan Tala", "shortName" : "WST", "value" : 1047.2258 }
+{ "_id" : { "$oid" : "534161a7884dac001a000094" }, "is_virtual" : false, "name" : "CFA Franc BEAC", "shortName" : "XAF", "value" : 217510.8641 }
+{ "_id" : { "$oid" : "534161a7884dac001a000095" }, "is_virtual" : false, "name" : "Silver (troy ounce)", "shortName" : "XAG", "value" : 22.7628 }
+{ "_id" : { "$oid" : "534161a7884dac001a000096" }, "is_virtual" : false, "name" : "Gold (troy ounce)", "shortName" : "XAU", "value" : 0.3483 }
+{ "_id" : { "$oid" : "534161a7884dac001a000097" }, "is_virtual" : false, "name" : "East Caribbean Dollar", "shortName" : "XCD", "value" : 1226.2901 }
+{ "_id" : { "$oid" : "534161a7884dac001a000098" }, "is_virtual" : false, "name" : "CFA Franc BCEAO", "shortName" : "XOF", "value" : 218479.3274 }
+{ "_id" : { "$oid" : "534161a7884dac001a000099" }, "is_virtual" : false, "name" : "CFP Franc", "shortName" : "XPF", "value" : 39629.5976 }
+{ "_id" : { "$oid" : "534161a7884dac001a00009a" }, "is_virtual" : false, "name" : "Yemeni Rial", "shortName" : "YER", "value" : 97623.5007 }
+{ "_id" : { "$oid" : "534161a7884dac001a00009b" }, "is_virtual" : false, "name" : "South African Rand", "shortName" : "ZAR", "value" : 4794.4909 }
+{ "_id" : { "$oid" : "534161a7884dac001a00009c" }, "is_virtual" : false, "name" : "Zambian Kwacha", "shortName" : "ZMW", "value" : 2792.2055 }
+{ "_id" : { "$oid" : "534161a7884dac001a00009d" }, "is_virtual" : false, "name" : "Zimbabwean Dollar", "shortName" : "ZWL", "value" : 146352.3963 }
+{ "_id" : { "$oid" : "53416a72da2116f30773f97e" }, "is_virtual" : false, "name" : "IMVU Credits", "shortName" : "IC", "value" : 0.16463116922 }
+{ "_id" : { "$oid" : "53416aa9da2116f30773f97f" }, "is_virtual" : false, "name" : "Lindens", "shortName" : "LD", "value" : 1.76326974292 }
+{ "_id" : { "$oid" : "53416ab5da2116f30773f980" }, "is_virtual" : false, "name" : "Toricredits", "shortName" : "TC", "value" : 0.02878548298 }
+{ "_id" : { "$oid" : "53416b1ada2116f30773f981" }, "is_virtual" : false, "name" : "Frenzoo Gold Coins", "shortName" : "FG", "value" : 0.9080594000000001 }
+{ "_id" : { "$oid" : "53416b27da2116f30773f982" }, "is_virtual" : false, "name" : "FriendsHangout Tokens", "shortName" : "FH", "value" : 0.07654940741999999 }
+{ "_id" : { "$oid" : "53416b34da2116f30773f983" }, "is_virtual" : false, "name" : "NuVera Note", "shortName" : "NN", "value" : 4.540297 }
