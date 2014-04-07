@@ -65,14 +65,15 @@ class CurrencyCommand extends ContainerAwareCommand
             $finalUrl = $curl_url.'?'.$fields_string;
             $finalUrl = rtrim($finalUrl, '&');
             $finalUrl = preg_replace('/\s+/', '', $finalUrl);
-            
+
             $result = file_get_contents($finalUrl);
             $result = json_decode($result);
             $result = str_replace(' '.CONTROL_CURRENCY, '', $result->result);
             
             $currentCurrency = $dm->getRepository('DroolCurrencyBundle:Currency')->find($id);
             
-            $currentCurrency->setValue(($result * $dollar->getValue())/CONTROL_AMOUNT);
+            $currentCurrency->setValue(((float)$result * $dollar->getValue())/CONTROL_AMOUNT);
+            $currentCurrency->setIsVirtual(true);
             $dm->persist($currentCurrency);
         }
         $dm->flush();
