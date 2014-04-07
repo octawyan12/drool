@@ -72,7 +72,7 @@ class CurrencyCommand extends ContainerAwareCommand
             
             $currentCurrency = $dm->getRepository('DroolCurrencyBundle:Currency')->find($id);
             
-            $currentCurrency->setValue(((float)$result * $dollar->getValue())/CONTROL_AMOUNT);
+            $currentCurrency->setValue(((float)$result * $dollar->getValue())*CONTROL_AMOUNT);
             $currentCurrency->setIsVirtual(true);
             $dm->persist($currentCurrency);
         }
