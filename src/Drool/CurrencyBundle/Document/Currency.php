@@ -105,6 +105,33 @@ class Currency
     }
     
     public function __toString() {
-        return $this->shortName;
+        return $this->name .' - '. $this->shortName;
+    } 
+    /**
+     * @var boolean $is_virtual
+     */
+    protected $is_virtual = false;
+
+
+    /**
+     * Set is_virtual
+     *
+     * @param boolean $isVirtual
+     * @return self
+     */
+    public function setIsVirtual($isVirtual)
+    {
+        $this->is_virtual = $isVirtual;
+        return $this;
+    }
+
+    /**
+     * Get is_virtual
+     *
+     * @return boolean $isVirtual
+     */
+    public function getIsVirtual()
+    {
+        return $this->is_virtual;
     }
 }

@@ -12,4 +12,11 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
  */
 class CurrencyRepository extends DocumentRepository
 {
+    public function findVirtual()
+    {
+//        $virtualCurrencies = array('IC', 'LD', 'TC', 'FG', 'FH', 'NN');
+        $qb = $this->createQueryBuilder();
+        $qb->addAnd($qb->expr()->field('is_virtual')->equals(true));
+        return $qb->getQuery()->execute();
+    }
 }

@@ -14,4 +14,7 @@ Drool\CurrencyBundle\Document\Currency:
             type: string
             length: 255
             column: short_name
+        is_virtual:
+            type: boolean
+            default: false
     lifecycleCallbacks: {  }
