@@ -17,6 +17,19 @@ class CurrencyRepository extends DocumentRepository
 //        $virtualCurrencies = array('IC', 'LD', 'TC', 'FG', 'FH', 'NN');
         $qb = $this->createQueryBuilder();
         $qb->addAnd($qb->expr()->field('is_virtual')->equals(true));
+
         return $qb->getQuery()->execute();
+    }
+    
+    public function findBitcoin()
+    {
+        $qb = $this->createQueryBuilder();
+        $qb->addAnd($qb->expr()->field('short_name')->equals('BT'));
+        
+        $result = $qb->getQuery()->execute();
+        if(count($result))
+            return $result;
+        
+        return null;
     }
 }

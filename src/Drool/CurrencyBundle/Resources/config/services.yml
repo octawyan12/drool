@@ -1,7 +1,11 @@
 parameters:
     drool_currency.converter.class: Drool\CurrencyBundle\Service\CurrencyConverter
+#    bitcoin.class: Drool\CurrencyBundle\Service\Bitcoin
 
 services:
     drool_currency.converter:
         class: %drool_currency.converter.class%
         arguments: [@service_container]
+#    bitcoin.currency:
+#        class: %bitcoin.class%
+#        arguments: []

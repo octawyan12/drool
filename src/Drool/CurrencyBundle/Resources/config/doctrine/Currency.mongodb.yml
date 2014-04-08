@@ -10,10 +10,9 @@ Drool\CurrencyBundle\Document\Currency:
             length: 255
         value:
             type: float
-        shortName:
+        short_name:
             type: string
             length: 255
-            column: short_name
         is_virtual:
             type: boolean
             default: false

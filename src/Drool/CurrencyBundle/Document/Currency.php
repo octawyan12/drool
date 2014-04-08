@@ -23,15 +23,20 @@ class Currency
     protected $value;
 
     /**
-     * @var string $shortName
+     * @var string $short_name
      */
-    protected $shortName;
+    protected $short_name;
+
+    /**
+     * @var boolean $is_virtual
+     */
+    protected $is_virtual = false;
 
 
     /**
      * Get id
      *
-     * @return integer $id
+     * @return id $id
      */
     public function getId()
     {
@@ -83,35 +88,26 @@ class Currency
     }
 
     /**
-     * Set shortName
+     * Set short_name
      *
      * @param string $shortName
      * @return self
      */
     public function setShortName($shortName)
     {
-        $this->shortName = $shortName;
+        $this->short_name = $shortName;
         return $this;
     }
 
     /**
-     * Get shortName
+     * Get short_name
      *
      * @return string $shortName
      */
     public function getShortName()
     {
-        return $this->shortName;
+        return $this->short_name;
     }
-    
-    public function __toString() {
-        return $this->name .' - '. $this->shortName;
-    } 
-    /**
-     * @var boolean $is_virtual
-     */
-    protected $is_virtual = false;
-
 
     /**
      * Set is_virtual
@@ -133,5 +129,9 @@ class Currency
     public function getIsVirtual()
     {
         return $this->is_virtual;
+    }
+    
+    public function __toString() {
+        return $this->name . ' (' . $this->short_name . ')';
     }
 }

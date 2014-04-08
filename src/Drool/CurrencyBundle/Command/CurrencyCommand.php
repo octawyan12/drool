@@ -25,26 +25,26 @@ class CurrencyCommand extends ContainerAwareCommand
     
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-//        $json_url = "https://bitpay.com/api/rates";
-//        $json = file_get_contents($json_url);
-//        $data = json_decode($json);
+        $json_url = "https://bitpay.com/api/rates";
+        $json = file_get_contents($json_url);
+        $data = json_decode($json);
         $dm = $this->getContainer()->get('doctrine_mongodb')->getManager();
-//        foreach($data as $currency) {
-//            if($currencyObject = $dm->getRepository('DroolCurrencyBundle:Currency')->findOneBy(array('shortName' => $currency->code))) {
-//                $currencyObject->setValue($currency->rate);
-//                $dm->persist($currencyObject);
-//            } else {
-//                $currencyObject = new Currency();
-//                $currencyObject->setName($currency->name);
-//                $currencyObject->setValue($currency->rate);
-//                $currencyObject->setShortName($currency->code);
-//                $dm->persist($currencyObject);
-//            }
-//        }
-//        $dm->flush();
+        foreach($data as $currency) {
+            if($currencyObject = $dm->getRepository('DroolCurrencyBundle:Currency')->findOneBy(array('shortName' => $currency->code))) {
+                $currencyObject->setValue($currency->rate);
+                $dm->persist($currencyObject);
+            } else {
+                $currencyObject = new Currency();
+                $currencyObject->setName($currency->name);
+                $currencyObject->setValue($currency->rate);
+                $currencyObject->setShortName($currency->code);
+                $dm->persist($currencyObject);
+            }
+        }
+        $dm->flush();
         $curl_url = "https://firstmetaexchange.com/exchange/doHypotheticalExchange";
         
-        $dollar = $dm->getRepository('DroolCurrencyBundle:Currency')->findOneBy(array('shortName' => CONTROL_CURRENCY));
+        $dollar = $dm->getRepository('DroolCurrencyBundle:Currency')->findOneBy(array('short_name' => CONTROL_CURRENCY));
         $allCurrencies = $dm->getRepository('DroolCurrencyBundle:Currency')->findVirtual();
         foreach($allCurrencies as $id => $value) {
             
@@ -72,9 +72,28 @@ class CurrencyCommand extends ContainerAwareCommand
             
             $currentCurrency = $dm->getRepository('DroolCurrencyBundle:Currency')->find($id);
             
-            $currentCurrency->setValue(((float)$result * $dollar->getValue())*CONTROL_AMOUNT);
+            $currentCurrency->setValue(((float)$result * $dollar->getValue()) * CONTROL_AMOUNT);
             $currentCurrency->setIsVirtual(true);
             $dm->persist($currentCurrency);
+        }
+        $dm->flush();
+        
+        $bitcoin_url = "http://data.mtgox.com/api/1/BTC". CONTROL_CURRENCY ."/ticker_fast";
+        $bitcoin = file_get_contents($bitcoin_url);
+        $bitcoin = json_decode($bitcoin);
+        $bitcoin = $bitcoin->return->sell->value;
+        $bitcoin = (float) $bitcoin * $dollar->getValue();
+        
+        if(!$bitcoinCurrency = $dm->getRepository('DroolCurrencyBundle:Currency')->findBitcoin()) {
+            $bitcoinC = new Currency();
+            $bitcoinC->setIsVirtual(true);
+            $bitcoinC->setName('Bitcoin');
+            $bitcoinC->setShortName('BT');
+            $bitcoinC->setValue($bitcoin);
+            $dm->persist($bitcoinC);
+        } else {
+            $bitcoinCurrency->setValue($bitcoin);
+            $dm->persist($bitcoinCurrency);
         }
         $dm->flush();
     }
